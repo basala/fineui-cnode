@@ -1,0 +1,14 @@
+.jump-text {
+  color: #80bd01;
+  font-size: 14px;
+}
+.normal-text {
+  color: #999;
+  font-size: 14px;
+}
+.jump-bar {
+  border-radius: 4px 4px 0 0;
+}
+.page-content {
+  background-color: #fff;
+}

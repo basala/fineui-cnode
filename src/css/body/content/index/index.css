@@ -1,0 +1,38 @@
+.topic-bar {
+  background-color: #fff;
+}
+.click-num {
+  color: #b4b4b4;
+  font-size: 10px;
+  font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti, sans-serif;
+  line-height: 28px;
+}
+.reply-num {
+  color: #9e78c0;
+  font-size: 14px;
+  font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti, sans-serif;
+  line-height: 28px;
+}
+.topic-bar .bi-vertical-layout div:last-child {
+  border-bottom: none!important;
+}
+.page-bar {
+  background-color: #fff;
+  padding: 5px;
+}
+.special-bar {
+  width: 32px;
+  height: 18px;
+  color: #fff;
+  background-color: #80bd01;
+  font-size: 14px;
+  border-radius: 4px;
+}
+.normal-bar {
+  width: 32px;
+  height: 18px;
+  color: #999;
+  background-color: #e5e5e5;
+  font-size: 14px;
+  border-radius: 4px;
+}

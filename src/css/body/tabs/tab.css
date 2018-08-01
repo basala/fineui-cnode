@@ -1,0 +1,13 @@
+.tab-bar div {
+  background-color: #fff;
+  border-left: 1px solid #3685f2;
+  border-top: 1px solid #3685f2;
+  border-bottom: 1px solid #3685f2;
+  font-size: 16px;
+}
+.tab-container {
+  margin-top: 10px;
+}
+.tab-bar td:last-child div {
+  border-right: 1px solid #3685f2;
+}

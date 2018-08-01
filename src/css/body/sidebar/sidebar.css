@@ -1,0 +1,20 @@
+.sign-bar {
+  color: #3923e4;
+}
+.side-bar {
+  font-size: 14px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+.title-bar {
+  border-bottom: 1px solid #ccc;
+}
+.client-code-link {
+  color: #778087;
+}
+.client-code-link:hover {
+  border-bottom: 1px solid #778087;
+}
+.text-color {
+  color: #778087;
+}

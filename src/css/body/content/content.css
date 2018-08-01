@@ -1,0 +1,68 @@
+.jump-text {
+  color: #80bd01;
+  font-size: 14px;
+}
+.normal-text {
+  color: #999;
+  font-size: 14px;
+}
+.jump-bar {
+  border-radius: 4px 4px 0 0;
+}
+.linkpage-body {
+  background-color: #fff;
+  border-radius: 0 0 4px 4px;
+}
+.linkpage-title {
+  font-size: 24.5px;
+  font-weight: 999;
+}
+.linkpage-title-small {
+  font-size: 18px;
+  font-weight: 999;
+}
+.linkpage-text {
+  font-size: 15px;
+}
+.linkpage-link {
+  color: #08c;
+  font-size: 15px;
+}
+.linkpage-link:hover {
+  text-decoration: underline;
+}
+.logo-link {
+  color: #778087;
+}
+.logo-link:hover {
+  text-decoration: underline;
+}
+.bookname {
+  font-weight: 700;
+  font-size: 15px;
+}
+.input-label {
+  color: #333;
+  font-weight: 400;
+  font-size: 14px;
+}
+.login-button {
+  background-color: #08c!important;
+  border-color: #08c!important;
+}
+.github-login-button {
+  background-color: #5bc0de!important;
+  border-color: #5bc0de!important;
+}
+.forget-text {
+  color: #778087;
+  font-size: 14px;
+}
+.forget-text:hover {
+  text-decoration: underline;
+}
+.linkpage-code {
+  font-size: 14px;
+  background: #f7f7f7;
+  padding: 5px 10px;
+}
