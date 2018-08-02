@@ -1,3 +1,4 @@
+/* jshint esversion: 6 */
 !(function() {
     var Content = BI.inherit(BI.Widget, {
         render: function() {

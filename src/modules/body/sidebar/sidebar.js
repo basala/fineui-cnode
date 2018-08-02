@@ -279,7 +279,7 @@
                     textAlign: "left",
                     text: "  ·  和其它人一起进步"
                 }]
-            }]
+            }];
         },
 
         _formatDefault: function() {

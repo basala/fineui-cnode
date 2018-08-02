@@ -449,7 +449,8 @@ if (!window.Dec) {
         }
     });
     BI.shortcut("dec.body.content.about", Content);
-})();!(function() {
+})();/* jshint esversion: 6 */
+!(function() {
     var Content = BI.inherit(BI.Widget, {
         render: function() {
             return {
@@ -2029,7 +2030,7 @@ if (!window.Dec) {
                     textAlign: "left",
                     text: "  ·  和其它人一起进步"
                 }]
-            }]
+            }];
         },
 
         _formatDefault: function() {
@@ -2428,15 +2429,7 @@ if (!window.Dec) {
         }
     });
     BI.shortcut("dec.body.tabs", Tabs);
-})();!(function () {
-    var Service = BI.inherit(BI.OB, {
-        run: function () {
-
-        }
-    });
-    BI.service("dec.service.body.tabs", Service);
-})();
-!(function() {
+})();!(function() {
     var Store = BI.inherit(Fix.Model, {
         _init: function() {
             this.platform = Dec.platformModel;
@@ -2886,87 +2879,6 @@ if (!window.Dec) {
 //     });
 //     BI.model("dec.model.main", Store);
 // })();
-!(function () {
-    BI.constant("dec.constant.nav.items", [
-        {
-            id: 1,
-            selected: true,
-            value: "首页"
-        }
-    ]);
-})();
-!(function () {
-    var Nav = BI.inherit(BI.Widget, {
-        _store: function () {
-            return BI.Models.getModel("dec.model.nav");
-        },
-
-        watch: {
-            selectedTab: function (val) {
-                this.tree.setValue(val);
-            }
-        },
-
-        render: function () {
-            var self = this;
-            return {
-                type: "bi.vertical",
-                items: [
-                    {
-                        type: "bi.multilayer_single_level_tree",
-                        ref: function () {
-                            self.tree = this;
-                        },
-                        listeners: [
-                            {
-                                eventName: BI.MultiLayerSingleLevelTree.EVENT_CHANGE,
-                                action: function (v) {
-                                    self.store.openTab(v);
-                                }
-                            }
-                        ],
-                        items: this.model.items
-                    }
-                ]
-            };
-        }
-    });
-    Nav.EVENT_VALUE_CHANGE = "EVENT_VALUE_CHANGE";
-    BI.shortcut("dec.nav", Nav);
-})();
-!(function () {
-    var Store = BI.inherit(Fix.Model, {
-        _init: function () {
-            this.platform = Dec.platformModel;
-        },
-        context: ["$selector"],
-        computed: {
-            selectedTab: function () {
-                return this.platform.selectedTab;
-            },
-            items: function () {
-                var self = this;
-                return BI.map(
-                    BI.Constants.getConstant("dec.constant.nav.items"),
-                    function (i, item) {
-                        return BI.extend({}, item, {
-                            selected: item.value === self.platform.selectedTab
-                        });
-                    }
-                );
-            }
-        },
-        actions: {
-            openTab: function (tab) {
-                if (!this.platform.openedTabs.contains(tab)) {
-                    this.platform.openedTabs.push(tab);
-                }
-                this.platform.selectedTab = tab;
-            }
-        }
-    });
-    BI.model("dec.model.nav", Store);
-})();
 !(function() {
     Dec.platformModel = Fix.define({
         selectedHash: "index",
