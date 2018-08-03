@@ -28,7 +28,8 @@ if (!window.Dec) {
                     case "getstart":
                         // console.log("getstart");
                         this.content.populate([{
-                            type: "dec.body.content.getstart"
+                            type: "dec.body.content.getstart",
+                            // height: 1250
                         }]);
                         break;
                     case "api":
@@ -90,7 +91,8 @@ if (!window.Dec) {
                     items: [{
                         // type: "bi.label",
                         // text: "test"
-                        type: "dec.body.content.index"
+                        type: "dec.body.content.index",
+                        height: 2110
                     }]
                 }, {
                     type: "bi.vertical",
