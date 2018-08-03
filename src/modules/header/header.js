@@ -3,7 +3,9 @@
         _store: function() {
             return BI.Models.getModel("dec.model.header");
         },
-
+        getWidth: function() {
+            return document.body.clientWidth;
+        },
         watch: {
             // selectedHeader: function(val) {
             //     this.list.setValue(val);
@@ -18,13 +20,13 @@
             return {
                 type: "bi.left_right_vertical_adapt",
                 cls: "header-panel",
-                lhgap: 10,
-                rhgap: 30,
+                lhgap: self.getWidth() * 0.0073,
+                rhgap: self.getWidth() * 0.022,
                 items: {
                     left: [{
                         type: "bi.image_button",
                         src: "https://o4j806krb.qnssl.com/public/images/cnodejs_light.svg",
-                        width: 120,
+                        width: self.getWidth() * 0.0876,
                         height: 30,
                         handler: function() {
                             self.store.selectHash("index");
@@ -32,7 +34,7 @@
                     }, {
                         type: "bi.clear_editor",
                         cls: "search-bar",
-                        width: 233,
+                        width: self.getWidth() * 0.123,
                         height: 26,
                         handler: function() {
                             // console.log(self);
@@ -53,7 +55,7 @@
                         }],
                         layouts: [{
                             type: "bi.vertical_adapt",
-                            hgap: 20
+                            hgap: self.getWidth() * 0.01464
                         }],
                         items: this.model.hashes
                     }]

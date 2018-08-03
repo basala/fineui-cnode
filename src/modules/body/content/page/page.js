@@ -1,11 +1,15 @@
 !(function() {
     var flag = {
         "share": "分享",
-        "ask": "问答"
+        "ask": "问答",
+        "default": "问答"
     };
     var Page = BI.inherit(BI.Widget, {
         _store: function() {
             return BI.Models.getModel("dec.model.body.content.page");
+        },
+        getWidth: function() {
+            return document.body.clientWidth;
         },
 
         watch: {
@@ -30,7 +34,7 @@
                         type: "bi.horizontal",
                         items: [{
                             type: "bi.label",
-                            text: value.top ? '置顶' : (value.good ? '精华' : flag[value.tab]),
+                            text: value.top ? '置顶' : (value.good ? '精华' : (value.tab ? flag[value.tab] : flag["default"])),
                             cls: (value.top || value.good) ? 'special-bar' : 'normal-bar'
                         }, {
                             type: "bi.label",
@@ -38,7 +42,7 @@
                             lgap: 5,
                             cls: "page-title",
                             whiteSpace: "normal",
-                            width: 666,
+                            width: self.getWidth() * 0.48755,
                             textAlign: "left"
                         }]
                     }, {
@@ -139,7 +143,7 @@
                         }]
                     }, {
                         type: "bi.label",
-                        width: 750,
+                        width: this.getWidth() * 0.549,
                         lgap: 30,
                         whiteSpace: "normal",
                         textAlign: "left",

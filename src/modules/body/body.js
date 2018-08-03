@@ -3,6 +3,10 @@
         _store: function() {
             return BI.Models.getModel("dec.model.body");
         },
+        getWidth: function() {
+            // console.log(document.body.clientWidth);
+            return document.body.clientWidth;
+        },
         watch: {
             // selectedTab: function(val) {
             //     this.tab.setSelect(val);
@@ -14,7 +18,8 @@
                         // this.content.populate(items);
                         // console.log("index");
                         this.content.populate([{
-                            type: "dec.body.content.index"
+                            type: "dec.body.content.index",
+                            height: 2110
                         }]);
                         break;
                     case "getstart":
@@ -69,13 +74,13 @@
             return {
                 type: "bi.horizontal",
                 hgap: 20,
-                lgap: 40,
+                lgap: self.getWidth() * 0.03,
                 ref: function() {
                     self.body = this;
                 },
                 items: [{
                     type: "bi.vertical",
-                    width: 909,
+                    width: self.getWidth() * 0.665,
                     ref: function() {
                         self.content = this;
                     },
@@ -86,7 +91,7 @@
                     }]
                 }, {
                     type: "bi.vertical",
-                    width: 290,
+                    width: self.getWidth() * 0.212,
                     ref: function() {
                         self.sidevar = this;
                     },

@@ -24,6 +24,9 @@
         computed: {
             topicList: function() {
                 return this.platform.topicList;
+            },
+            selectedTab: function() {
+                return this.platform.selectedTab;
             }
         },
 
@@ -56,6 +59,7 @@
                     },
                     success: function(res) {
                         self.platform.topicList = res.data;
+                        // window.scrollTo(0, 0);
                     }
                 });
             }

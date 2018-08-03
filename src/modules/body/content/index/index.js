@@ -1,11 +1,15 @@
 !(function() {
     var flag = {
         "share": "分享",
-        "ask": "问答"
+        "ask": "问答",
+        "default": "问答"
     };
     var Index = BI.inherit(BI.Widget, {
         _store: function() {
             return BI.Models.getModel("dec.model.body.content.index");
+        },
+        getWidth: function() {
+            return document.body.clientWidth;
         },
 
         watch: {
@@ -13,7 +17,30 @@
                 // console.log("the topicList is changing...");
                 // console.log(val);
                 this.topiclist.populate(this._formatItems(val));
+            },
+            selectedTab: function(val) {
+                console.log("the selectedTab is changing...");
+                this.pagelist.populate(this._formatDefaultPager());
             }
+        },
+
+        _formatDefaultPager: function() {
+            var self = this;
+            console.log("populate!!")
+            return [{
+                type: "bi.pager",
+                dynamicShow: false,
+                dynamicShowFirstLast: true,
+                height: 26,
+                pages: 100,
+                groups: 5,
+                curr: 1,
+                first: "首页>",
+                last: "<尾页",
+                jump: function(page) {
+                    self.store.getList(page.curr);
+                }
+            }];
         },
 
         _formatItems: function(items) {
@@ -58,13 +85,13 @@
                         }]
                     }, {
                         type: "bi.label",
-                        text: value.top ? '置顶' : (value.good ? '精华' : flag[value.tab]),
+                        text: value.top ? '置顶' : (value.good ? '精华' : (value.tab ? flag[value.tab] : flag["default"])),
                         cls: (value.top || value.good) ? 'special-bar' : 'normal-bar'
                         // width: 32,
                         // height: 18
                     }, {
                         type: "bi.text_button",
-                        width: 620,
+                        width: self.getWidth() * 0.4539,
                         text: value.title,
                         title: value.title,
                         textAlign: "left",
@@ -74,7 +101,7 @@
                     }, {
                         type: "bi.vertical_adapt",
                         // width: 120,
-                        lgap: 30,
+                        lgap: self.getWidth() * 0.02196,
                         items: [
                             // {
                             //     type: "bi.image_button",
@@ -113,19 +140,13 @@
                     items: [{}],
                     cls: "bi-border-bottom topic-bar"
                 }, {
-                    type: "bi.pager",
-                    dynamicShow: false,
-                    dynamicShowFirstLast: true,
-                    height: 26,
-                    pages: 100,
-                    groups: 5,
-                    curr: 1,
-                    first: "首页>",
-                    last: "<尾页",
+                    type: "bi.vertical_adapt",
                     cls: "page-bar",
-                    jump: function(page) {
-                        self.store.getList(page.curr);
-                    }
+                    ref: function() {
+                        self.pagelist = this;
+                    },
+                    // width: self.getWidth() * 0.665,
+                    items: self._formatDefaultPager()
                 }]
             };
         }

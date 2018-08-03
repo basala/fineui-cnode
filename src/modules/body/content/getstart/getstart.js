@@ -1,6 +1,10 @@
 !(function() {
     var Content = BI.inherit(BI.Widget, {
+        getWidth: function() {
+            return document.body.clientWidth;
+        },
         render: function() {
+            var self = this;
             return {
                 type: "bi.vertical",
                 items: [{
@@ -36,7 +40,7 @@
                         type: "bi.vertical",
                         vgap: 15,
                         hgap: 10,
-                        width: 870,
+                        width: self.getWidth() * 0.6369,
                         items: [{
                             type: "bi.label",
                             text: "Node.js入门",

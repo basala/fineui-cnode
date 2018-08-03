@@ -2,39 +2,13 @@ if (!window.Dec) {
     window.Dec = {};
     // Dec.injection = {};
 }!(function() {
-    // var Widget = BI.inherit(BI.Widget, {
-    //     _store: function() {
-    //         return BI.Models.getModel("dec.model.body");
-    //     },
-
-    //     watch: {
-    //         showText: function(val) {
-    //             this.label.setValue("这里是异步context的演示:" + val);
-    //         }
-    //     },
-
-    //     render: function() {
-    //         var self = this;
-
-    //         return {
-    //             type: "bi.vertical",
-    //             items: [{
-    //                 type: "bi.label",
-    //                 ref: function() {
-    //                     self.label = this;
-    //                 },
-    //                 value: "这里是异步context的演示:" + this.model.showText,
-    //                 cls: "bi-border-bottom",
-    //                 height: 30
-    //             }]
-    //         };
-    //     }
-    // });
-    // BI.shortcut("dec.async_context", Widget);
-})();!(function() {
     var Body = BI.inherit(BI.Widget, {
         _store: function() {
             return BI.Models.getModel("dec.model.body");
+        },
+        getWidth: function() {
+            // console.log(document.body.clientWidth);
+            return document.body.clientWidth;
         },
         watch: {
             // selectedTab: function(val) {
@@ -47,7 +21,8 @@ if (!window.Dec) {
                         // this.content.populate(items);
                         // console.log("index");
                         this.content.populate([{
-                            type: "dec.body.content.index"
+                            type: "dec.body.content.index",
+                            height: 2110
                         }]);
                         break;
                     case "getstart":
@@ -102,13 +77,13 @@ if (!window.Dec) {
             return {
                 type: "bi.horizontal",
                 hgap: 20,
-                lgap: 40,
+                lgap: self.getWidth() * 0.03,
                 ref: function() {
                     self.body = this;
                 },
                 items: [{
                     type: "bi.vertical",
-                    width: 909,
+                    width: self.getWidth() * 0.665,
                     ref: function() {
                         self.content = this;
                     },
@@ -119,7 +94,7 @@ if (!window.Dec) {
                     }]
                 }, {
                     type: "bi.vertical",
-                    width: 290,
+                    width: self.getWidth() * 0.212,
                     ref: function() {
                         self.sidevar = this;
                     },
@@ -176,7 +151,12 @@ if (!window.Dec) {
     BI.model("dec.model.body", Store);
 })();!(function() {
     var Content = BI.inherit(BI.Widget, {
+        getWidth: function() {
+            return document.body.clientWidth;
+        },
+
         render: function() {
+            var self = this;
             return {
                 type: "bi.vertical",
                 items: [{
@@ -212,7 +192,7 @@ if (!window.Dec) {
                         type: "bi.vertical",
                         vgap: 15,
                         hgap: 10,
-                        width: 870,
+                        width: self.getWidth() * 0.6369,
                         items: [{
                             type: "bi.label",
                             text: "主页",
@@ -452,7 +432,12 @@ if (!window.Dec) {
 })();/* jshint esversion: 6 */
 !(function() {
     var Content = BI.inherit(BI.Widget, {
+        getWidth: function() {
+            return document.body.clientWidth;
+        },
+
         render: function() {
+            var self = this;
             return {
                 type: "bi.vertical",
                 items: [{
@@ -488,7 +473,7 @@ if (!window.Dec) {
                         type: "bi.vertical",
                         vgap: 15,
                         hgap: 10,
-                        width: 870,
+                        width: self.getWidth() * 0.6369,
                         items: [{
                             type: "bi.label",
                             text: "以下 api 路径均以 https://cnodejs.org/api/v1 为前缀",
@@ -1028,7 +1013,11 @@ if (!window.Dec) {
     BI.shortcut("dec.body.content.api", Content);
 })();!(function() {
     var Content = BI.inherit(BI.Widget, {
+        getWidth: function() {
+            return document.body.clientWidth;
+        },
         render: function() {
+            var self = this;
             return {
                 type: "bi.vertical",
                 items: [{
@@ -1064,7 +1053,7 @@ if (!window.Dec) {
                         type: "bi.vertical",
                         vgap: 15,
                         hgap: 10,
-                        width: 870,
+                        width: self.getWidth() * 0.6369,
                         items: [{
                             type: "bi.label",
                             text: "Node.js入门",
@@ -1255,11 +1244,15 @@ if (!window.Dec) {
 })();!(function() {
     var flag = {
         "share": "分享",
-        "ask": "问答"
+        "ask": "问答",
+        "default": "问答"
     };
     var Index = BI.inherit(BI.Widget, {
         _store: function() {
             return BI.Models.getModel("dec.model.body.content.index");
+        },
+        getWidth: function() {
+            return document.body.clientWidth;
         },
 
         watch: {
@@ -1267,7 +1260,30 @@ if (!window.Dec) {
                 // console.log("the topicList is changing...");
                 // console.log(val);
                 this.topiclist.populate(this._formatItems(val));
+            },
+            selectedTab: function(val) {
+                console.log("the selectedTab is changing...");
+                this.pagelist.populate(this._formatDefaultPager());
             }
+        },
+
+        _formatDefaultPager: function() {
+            var self = this;
+            console.log("populate!!")
+            return [{
+                type: "bi.pager",
+                dynamicShow: false,
+                dynamicShowFirstLast: true,
+                height: 26,
+                pages: 100,
+                groups: 5,
+                curr: 1,
+                first: "首页>",
+                last: "<尾页",
+                jump: function(page) {
+                    self.store.getList(page.curr);
+                }
+            }];
         },
 
         _formatItems: function(items) {
@@ -1312,13 +1328,13 @@ if (!window.Dec) {
                         }]
                     }, {
                         type: "bi.label",
-                        text: value.top ? '置顶' : (value.good ? '精华' : flag[value.tab]),
+                        text: value.top ? '置顶' : (value.good ? '精华' : (value.tab ? flag[value.tab] : flag["default"])),
                         cls: (value.top || value.good) ? 'special-bar' : 'normal-bar'
                         // width: 32,
                         // height: 18
                     }, {
                         type: "bi.text_button",
-                        width: 620,
+                        width: self.getWidth() * 0.4539,
                         text: value.title,
                         title: value.title,
                         textAlign: "left",
@@ -1328,7 +1344,7 @@ if (!window.Dec) {
                     }, {
                         type: "bi.vertical_adapt",
                         // width: 120,
-                        lgap: 30,
+                        lgap: self.getWidth() * 0.02196,
                         items: [
                             // {
                             //     type: "bi.image_button",
@@ -1367,19 +1383,13 @@ if (!window.Dec) {
                     items: [{}],
                     cls: "bi-border-bottom topic-bar"
                 }, {
-                    type: "bi.pager",
-                    dynamicShow: false,
-                    dynamicShowFirstLast: true,
-                    height: 26,
-                    pages: 100,
-                    groups: 5,
-                    curr: 1,
-                    first: "首页>",
-                    last: "<尾页",
+                    type: "bi.vertical_adapt",
                     cls: "page-bar",
-                    jump: function(page) {
-                        self.store.getList(page.curr);
-                    }
+                    ref: function() {
+                        self.pagelist = this;
+                    },
+                    // width: self.getWidth() * 0.665,
+                    items: self._formatDefaultPager()
                 }]
             };
         }
@@ -1417,6 +1427,9 @@ if (!window.Dec) {
         computed: {
             topicList: function() {
                 return this.platform.topicList;
+            },
+            selectedTab: function() {
+                return this.platform.selectedTab;
             }
         },
 
@@ -1449,6 +1462,7 @@ if (!window.Dec) {
                     },
                     success: function(res) {
                         self.platform.topicList = res.data;
+                        // window.scrollTo(0, 0);
                     }
                 });
             }
@@ -1458,11 +1472,15 @@ if (!window.Dec) {
 })();!(function() {
     var flag = {
         "share": "分享",
-        "ask": "问答"
+        "ask": "问答",
+        "default": "问答"
     };
     var Page = BI.inherit(BI.Widget, {
         _store: function() {
             return BI.Models.getModel("dec.model.body.content.page");
+        },
+        getWidth: function() {
+            return document.body.clientWidth;
         },
 
         watch: {
@@ -1487,7 +1505,7 @@ if (!window.Dec) {
                         type: "bi.horizontal",
                         items: [{
                             type: "bi.label",
-                            text: value.top ? '置顶' : (value.good ? '精华' : flag[value.tab]),
+                            text: value.top ? '置顶' : (value.good ? '精华' : (value.tab ? flag[value.tab] : flag["default"])),
                             cls: (value.top || value.good) ? 'special-bar' : 'normal-bar'
                         }, {
                             type: "bi.label",
@@ -1495,7 +1513,7 @@ if (!window.Dec) {
                             lgap: 5,
                             cls: "page-title",
                             whiteSpace: "normal",
-                            width: 666,
+                            width: self.getWidth() * 0.48755,
                             textAlign: "left"
                         }]
                     }, {
@@ -1596,7 +1614,7 @@ if (!window.Dec) {
                         }]
                     }, {
                         type: "bi.label",
-                        width: 750,
+                        width: this.getWidth() * 0.549,
                         lgap: 30,
                         whiteSpace: "normal",
                         textAlign: "left",
@@ -1640,7 +1658,11 @@ if (!window.Dec) {
     BI.model("dec.model.body.content.page", Store);
 })();!(function() {
     var Content = BI.inherit(BI.Widget, {
+        getWidth: function() {
+            return document.body.clientWidth;
+        },
         render: function() {
+            var self = this;
             return {
                 type: "bi.vertical",
                 items: [{
@@ -1675,7 +1697,7 @@ if (!window.Dec) {
                     height: 260,
                     items: [{
                         type: "bi.vertical",
-                        width: 890,
+                        width: self.getWidth() * 0.6515,
                         height: 240,
                         items: [{
                             type: "bi.vertical_adapt",
@@ -1683,14 +1705,14 @@ if (!window.Dec) {
                             items: [{
                                 type: "bi.label",
                                 text: "用户名",
-                                width: 160,
+                                width: self.getWidth() * 0.117,
                                 height: 25,
                                 cls: "input-label",
                                 textAlign: "right"
                             }, {
                                 el: {
                                     type: "bi.text_editor",
-                                    width: 284,
+                                    width: self.getWidth() * 0.208,
                                     height: 30
                                 },
                                 lgap: 15
@@ -1701,14 +1723,14 @@ if (!window.Dec) {
                             items: [{
                                 type: "bi.label",
                                 text: "密码",
-                                width: 160,
+                                width: self.getWidth() * 0.117,
                                 height: 25,
                                 cls: "input-label",
                                 textAlign: "right"
                             }, {
                                 el: {
                                     type: "bi.text_editor",
-                                    width: 284,
+                                    width: self.getWidth() * 0.208,
                                     height: 30
                                 },
                                 lgap: 15
@@ -1721,7 +1743,7 @@ if (!window.Dec) {
                                     type: "bi.button",
                                     text: "登录",
                                     cls: "login-button",
-                                    width: 52,
+                                    width: self.getWidth() * 0.038,
                                     height: 34
                                 },
                                 lgap: 175
@@ -1730,7 +1752,7 @@ if (!window.Dec) {
                                     type: "bi.button",
                                     text: "通过GitHub登录",
                                     cls: "github-login-button",
-                                    width: 150,
+                                    width: self.getWidth() * 0.1098,
                                     height: 34
                                 },
                                 lgap: 10
@@ -2635,7 +2657,9 @@ if (!window.Dec) {
         _store: function() {
             return BI.Models.getModel("dec.model.header");
         },
-
+        getWidth: function() {
+            return document.body.clientWidth;
+        },
         watch: {
             // selectedHeader: function(val) {
             //     this.list.setValue(val);
@@ -2650,13 +2674,13 @@ if (!window.Dec) {
             return {
                 type: "bi.left_right_vertical_adapt",
                 cls: "header-panel",
-                lhgap: 10,
-                rhgap: 30,
+                lhgap: self.getWidth() * 0.0073,
+                rhgap: self.getWidth() * 0.022,
                 items: {
                     left: [{
                         type: "bi.image_button",
                         src: "https://o4j806krb.qnssl.com/public/images/cnodejs_light.svg",
-                        width: 120,
+                        width: self.getWidth() * 0.0876,
                         height: 30,
                         handler: function() {
                             self.store.selectHash("index");
@@ -2664,7 +2688,7 @@ if (!window.Dec) {
                     }, {
                         type: "bi.clear_editor",
                         cls: "search-bar",
-                        width: 233,
+                        width: self.getWidth() * 0.123,
                         height: 26,
                         handler: function() {
                             // console.log(self);
@@ -2685,7 +2709,7 @@ if (!window.Dec) {
                         }],
                         layouts: [{
                             type: "bi.vertical_adapt",
-                            hgap: 20
+                            hgap: self.getWidth() * 0.01464
                         }],
                         items: this.model.hashes
                     }]
