@@ -19,28 +19,9 @@
                 this.topiclist.populate(this._formatItems(val));
             },
             selectedTab: function(val) {
-                console.log("the selectedTab is changing...");
-                this.pagelist.populate(this._formatDefaultPager());
+                // console.log("the selectedTab is changing...");
+                this.pagelist.setValue(1);
             }
-        },
-
-        _formatDefaultPager: function() {
-            var self = this;
-            console.log("populate!!")
-            return [{
-                type: "bi.pager",
-                dynamicShow: false,
-                dynamicShowFirstLast: true,
-                height: 26,
-                pages: 100,
-                groups: 5,
-                curr: 1,
-                first: "首页>",
-                last: "<尾页",
-                jump: function(page) {
-                    self.store.getList(page.curr);
-                }
-            }];
         },
 
         _formatItems: function(items) {
@@ -140,13 +121,23 @@
                     items: [{}],
                     cls: "bi-border-bottom topic-bar"
                 }, {
-                    type: "bi.vertical_adapt",
+                    type: "bi.pager",
+                    dynamicShow: false,
+                    dynamicShowFirstLast: true,
+                    height: 26,
+                    pages: 100,
+                    groups: 5,
+                    curr: 1,
+                    first: "首页>",
+                    last: "<尾页",
+                    jump: function(page) {
+                        self.store.getList(page.curr);
+                    },
                     cls: "page-bar",
                     ref: function() {
                         self.pagelist = this;
-                    },
-                    // width: self.getWidth() * 0.665,
-                    items: self._formatDefaultPager()
+                        // items: [{}]
+                    }
                 }]
             };
         }
