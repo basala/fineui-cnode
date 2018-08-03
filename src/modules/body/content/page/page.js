@@ -143,7 +143,7 @@
                         }]
                     }, {
                         type: "bi.label",
-                        width: this.getWidth() * 0.549,
+                        width: self.getWidth() * 0.549,
                         lgap: 30,
                         whiteSpace: "normal",
                         textAlign: "left",

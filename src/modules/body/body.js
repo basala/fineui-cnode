@@ -19,13 +19,13 @@
                         // console.log("index");
                         this.content.populate([{
                             type: "dec.body.content.index",
-                            height: 2110
+                            // height: 2110
                         }]);
                         break;
                     case "getstart":
                         // console.log("getstart");
                         this.content.populate([{
-                            type: "dec.body.content.getstart",
+                            type: "dec.body.content.getstart"
                             // height: 1250
                         }]);
                         break;
@@ -88,8 +88,8 @@
                     items: [{
                         // type: "bi.label",
                         // text: "test"
-                        type: "dec.body.content.index",
-                        height: 2110
+                        type: "dec.body.content.index"
+                        // height: 2110
                     }]
                 }, {
                     type: "bi.vertical",

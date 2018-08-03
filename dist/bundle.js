@@ -22,13 +22,13 @@ if (!window.Dec) {
                         // console.log("index");
                         this.content.populate([{
                             type: "dec.body.content.index",
-                            height: 2110
+                            // height: 2110
                         }]);
                         break;
                     case "getstart":
                         // console.log("getstart");
                         this.content.populate([{
-                            type: "dec.body.content.getstart",
+                            type: "dec.body.content.getstart"
                             // height: 1250
                         }]);
                         break;
@@ -91,8 +91,8 @@ if (!window.Dec) {
                     items: [{
                         // type: "bi.label",
                         // text: "test"
-                        type: "dec.body.content.index",
-                        height: 2110
+                        type: "dec.body.content.index"
+                        // height: 2110
                     }]
                 }, {
                     type: "bi.vertical",
@@ -1245,9 +1245,9 @@ if (!window.Dec) {
     BI.shortcut("dec.body.content.getstart", Content);
 })();!(function() {
     var flag = {
-        "share": "分享",
-        "ask": "问答",
-        "default": "问答"
+        share: "分享",
+        ask: "问答",
+        default: "问答"
     };
     var Index = BI.inherit(BI.Widget, {
         _store: function() {
@@ -1262,8 +1262,11 @@ if (!window.Dec) {
                 // console.log("the topicList is changing...");
                 // console.log(val);
                 this.topiclist.populate(this._formatItems(val));
+                BI.defer(function() {
+                    $('#wrapper').scrollTop(0);
+                });
             },
-            selectedTab: function(val) {
+            selectedTab: function() {
                 // console.log("the selectedTab is changing...");
                 this.pagelist.setValue(1);
             }
@@ -1311,8 +1314,8 @@ if (!window.Dec) {
                         }]
                     }, {
                         type: "bi.label",
-                        text: value.top ? '置顶' : (value.good ? '精华' : (value.tab ? flag[value.tab] : flag["default"])),
-                        cls: (value.top || value.good) ? 'special-bar' : 'normal-bar'
+                        text: value.top ? "置顶" : (value.good ? "精华" : (value.tab ? flag[value.tab] : flag["default"])),
+                        cls: (value.top || value.good) ? "special-bar" : "normal-bar"
                         // width: 32,
                         // height: 18
                     }, {
@@ -1607,7 +1610,7 @@ if (!window.Dec) {
                         }]
                     }, {
                         type: "bi.label",
-                        width: this.getWidth() * 0.549,
+                        width: self.getWidth() * 0.549,
                         lgap: 30,
                         whiteSpace: "normal",
                         textAlign: "left",

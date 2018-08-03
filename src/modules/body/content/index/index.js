@@ -1,8 +1,8 @@
 !(function() {
     var flag = {
-        "share": "分享",
-        "ask": "问答",
-        "default": "问答"
+        share: "分享",
+        ask: "问答",
+        default: "问答"
     };
     var Index = BI.inherit(BI.Widget, {
         _store: function() {
@@ -17,8 +17,11 @@
                 // console.log("the topicList is changing...");
                 // console.log(val);
                 this.topiclist.populate(this._formatItems(val));
+                BI.defer(function() {
+                    $('#wrapper').scrollTop(0);
+                });
             },
-            selectedTab: function(val) {
+            selectedTab: function() {
                 // console.log("the selectedTab is changing...");
                 this.pagelist.setValue(1);
             }
@@ -66,8 +69,8 @@
                         }]
                     }, {
                         type: "bi.label",
-                        text: value.top ? '置顶' : (value.good ? '精华' : (value.tab ? flag[value.tab] : flag["default"])),
-                        cls: (value.top || value.good) ? 'special-bar' : 'normal-bar'
+                        text: value.top ? "置顶" : (value.good ? "精华" : (value.tab ? flag[value.tab] : flag["default"])),
+                        cls: (value.top || value.good) ? "special-bar" : "normal-bar"
                         // width: 32,
                         // height: 18
                     }, {
