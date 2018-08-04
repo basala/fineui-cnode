@@ -1,9 +1,5 @@
 !(function() {
     var Content = BI.inherit(BI.Widget, {
-        getWidth: function() {
-            return document.body.clientWidth;
-        },
-
         render: function() {
             var self = this;
             return {
@@ -41,7 +37,6 @@
                         type: "bi.vertical",
                         vgap: 15,
                         hgap: 10,
-                        width: self.getWidth() * 0.6369,
                         items: [{
                             type: "bi.label",
                             text: "主页",
@@ -68,7 +63,6 @@
                         }, {
                             type: "bi.horizontal",
                             whiteSpace: "normal",
-                            // textAlign: "left",
                             cls: "linkpage-text",
                             items: [{
                                 type: "bi.label",
@@ -91,7 +85,6 @@
                         }, {
                             type: "bi.horizontal",
                             whiteSpace: "normal",
-                            // textAlign: "left",
                             cls: "linkpage-text",
                             items: [{
                                 type: "bi.label",
@@ -113,7 +106,6 @@
                         }, {
                             type: "bi.horizontal",
                             whiteSpace: "normal",
-                            // textAlign: "left",
                             cls: "linkpage-text",
                             items: [{
                                 type: "bi.label",
@@ -129,7 +121,6 @@
                         }, {
                             type: "bi.horizontal",
                             whiteSpace: "normal",
-                            // textAlign: "left",
                             cls: "linkpage-text",
                             items: [{
                                 type: "bi.label",
@@ -150,7 +141,6 @@
                             cls: "linkpage-text"
                         }, {
                             type: "bi.horizontal",
-                            // textAlign: "left",
                             cls: "linkpage-text",
                             items: [{
                                 type: "bi.label",

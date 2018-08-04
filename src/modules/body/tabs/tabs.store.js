@@ -11,7 +11,6 @@
                     return {
                         type: "bi.text_button",
                         cls: "bi-list-item-select",
-                        // width: 70,
                         height: 24,
                         value: tab.value,
                         text: tab.text,

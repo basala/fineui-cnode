@@ -1,10 +1,5 @@
-/* jshint esversion: 6 */
-!(function() {
+/* jshint esversion: 6 */ !(function() {
     var Content = BI.inherit(BI.Widget, {
-        getWidth: function() {
-            return document.body.clientWidth;
-        },
-
         render: function() {
             var self = this;
             return {
@@ -42,7 +37,6 @@
                         type: "bi.vertical",
                         vgap: 15,
                         hgap: 10,
-                        width: self.getWidth() * 0.6369,
                         items: [{
                             type: "bi.label",
                             text: "以下 api 路径均以 https://cnodejs.org/api/v1 为前缀",

@@ -1,8 +1,5 @@
 !(function() {
     var Content = BI.inherit(BI.Widget, {
-        getWidth: function() {
-            return document.body.clientWidth;
-        },
         render: function() {
             var self = this;
             return {
@@ -39,7 +36,6 @@
                     height: 260,
                     items: [{
                         type: "bi.vertical",
-                        width: self.getWidth() * 0.6515,
                         height: 240,
                         items: [{
                             type: "bi.vertical_adapt",
@@ -47,14 +43,14 @@
                             items: [{
                                 type: "bi.label",
                                 text: "用户名",
-                                width: self.getWidth() * 0.117,
+                                width: 160,
                                 height: 25,
                                 cls: "input-label",
                                 textAlign: "right"
                             }, {
                                 el: {
                                     type: "bi.text_editor",
-                                    width: self.getWidth() * 0.208,
+                                    width: 280,
                                     height: 30
                                 },
                                 lgap: 15
@@ -65,14 +61,14 @@
                             items: [{
                                 type: "bi.label",
                                 text: "密码",
-                                width: self.getWidth() * 0.117,
+                                width: 160,
                                 height: 25,
                                 cls: "input-label",
                                 textAlign: "right"
                             }, {
                                 el: {
                                     type: "bi.text_editor",
-                                    width: self.getWidth() * 0.208,
+                                    width: 280,
                                     height: 30
                                 },
                                 lgap: 15
@@ -85,7 +81,7 @@
                                     type: "bi.button",
                                     text: "登录",
                                     cls: "login-button",
-                                    width: self.getWidth() * 0.038,
+                                    width: 80,
                                     height: 34
                                 },
                                 lgap: 175
@@ -94,7 +90,7 @@
                                     type: "bi.button",
                                     text: "通过GitHub登录",
                                     cls: "github-login-button",
-                                    width: self.getWidth() * 0.1098,
+                                    width: 150,
                                     height: 34
                                 },
                                 lgap: 10

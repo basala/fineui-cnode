@@ -6,30 +6,20 @@ if (!window.Dec) {
         _store: function() {
             return BI.Models.getModel("dec.model.body");
         },
-        getWidth: function() {
-            // console.log(document.body.clientWidth);
-            return document.body.clientWidth;
-        },
-        watch: {
-            // selectedTab: function(val) {
-            //     this.tab.setSelect(val);
-            // }
 
+        watch: {
             selectedHash: function(hash) {
                 switch (hash) {
                     case "index":
-                        // this.content.populate(items);
                         // console.log("index");
                         this.content.populate([{
-                            type: "dec.body.content.index",
-                            // height: 2110
+                            type: "dec.body.content.index"
                         }]);
                         break;
                     case "getstart":
                         // console.log("getstart");
                         this.content.populate([{
                             type: "dec.body.content.getstart"
-                            // height: 1250
                         }]);
                         break;
                     case "api":
@@ -68,40 +58,42 @@ if (!window.Dec) {
             }
         },
 
-        beforeInit: function(callback) {
-            setTimeout(callback, 500);
-        },
-
         render: function() {
             var self = this;
-
             return {
-                type: "bi.horizontal",
-                hgap: 20,
-                lgap: self.getWidth() * 0.03,
-                ref: function() {
-                    self.body = this;
-                },
+                type: "bi.vertical",
+                lgap: 60,
+                rgap: 60,
                 items: [{
-                    type: "bi.vertical",
-                    width: self.getWidth() * 0.665,
+                    // type: "bi.horizontal",
+                    type: "bi.htape",
+                    height: 2200,
                     ref: function() {
-                        self.content = this;
+                        self.body = this;
                     },
                     items: [{
-                        // type: "bi.label",
-                        // text: "test"
-                        type: "dec.body.content.index"
-                        // height: 2110
-                    }]
-                }, {
-                    type: "bi.vertical",
-                    width: self.getWidth() * 0.212,
-                    ref: function() {
-                        self.sidevar = this;
-                    },
-                    items: [{
-                        type: "dec.body.sidebar"
+                        width: "fill",
+                        el: {
+                            type: "bi.vertical",
+                            ref: function() {
+                                self.content = this;
+                            },
+                            rgap: 16,
+                            items: [{
+                                type: "dec.body.content.index"
+                            }]
+                        }
+                    }, {
+                        width: 290,
+                        el: {
+                            type: "bi.vertical",
+                            ref: function() {
+                                self.sidebar = this;
+                            },
+                            items: [{
+                                type: "dec.body.sidebar"
+                            }]
+                        }
                     }]
                 }]
             };
@@ -113,38 +105,7 @@ if (!window.Dec) {
         _init: function() {
             this.platform = Dec.platformModel;
         },
-        // context: ["testContext", "$selector"],
         computed: {
-            // selectedTab: function() {
-            //     return this.platform.selectedTab;
-            // },
-            // $widgetSelector: function() {
-            //     return this.model.$selector.getSelector("widgets.xxID");
-            // },
-            // $dimensionSelector: function() {
-            //     return this.model.$widgetSelector.getSelector("dimensions.xxID");
-            // },
-            // dimensionName: function() {
-            //     return this.model.$dimensionSelector.data.name;
-            // },
-            // showText: function() {
-            //     return (
-            //         "hash:" +
-            //         this.platform.selectedHash +
-            //         "---" +
-            //         "header:" +
-            //         this.platform.selectedHeader +
-            //         "---" +
-            //         "tab:" +
-            //         this.platform.selectedTab +
-            //         "---" +
-            //         "context:" + this.model.testContext +
-            //         "---" +
-            //         "data:" +
-            //         this.model.dimensionName
-            //     );
-            // }
-
             selectedHash: function() {
                 return this.platform.selectedHash;
             }
@@ -153,10 +114,6 @@ if (!window.Dec) {
     BI.model("dec.model.body", Store);
 })();!(function() {
     var Content = BI.inherit(BI.Widget, {
-        getWidth: function() {
-            return document.body.clientWidth;
-        },
-
         render: function() {
             var self = this;
             return {
@@ -194,7 +151,6 @@ if (!window.Dec) {
                         type: "bi.vertical",
                         vgap: 15,
                         hgap: 10,
-                        width: self.getWidth() * 0.6369,
                         items: [{
                             type: "bi.label",
                             text: "主页",
@@ -221,7 +177,6 @@ if (!window.Dec) {
                         }, {
                             type: "bi.horizontal",
                             whiteSpace: "normal",
-                            // textAlign: "left",
                             cls: "linkpage-text",
                             items: [{
                                 type: "bi.label",
@@ -244,7 +199,6 @@ if (!window.Dec) {
                         }, {
                             type: "bi.horizontal",
                             whiteSpace: "normal",
-                            // textAlign: "left",
                             cls: "linkpage-text",
                             items: [{
                                 type: "bi.label",
@@ -266,7 +220,6 @@ if (!window.Dec) {
                         }, {
                             type: "bi.horizontal",
                             whiteSpace: "normal",
-                            // textAlign: "left",
                             cls: "linkpage-text",
                             items: [{
                                 type: "bi.label",
@@ -282,7 +235,6 @@ if (!window.Dec) {
                         }, {
                             type: "bi.horizontal",
                             whiteSpace: "normal",
-                            // textAlign: "left",
                             cls: "linkpage-text",
                             items: [{
                                 type: "bi.label",
@@ -303,7 +255,6 @@ if (!window.Dec) {
                             cls: "linkpage-text"
                         }, {
                             type: "bi.horizontal",
-                            // textAlign: "left",
                             cls: "linkpage-text",
                             items: [{
                                 type: "bi.label",
@@ -431,13 +382,8 @@ if (!window.Dec) {
         }
     });
     BI.shortcut("dec.body.content.about", Content);
-})();/* jshint esversion: 6 */
-!(function() {
+})();/* jshint esversion: 6 */ !(function() {
     var Content = BI.inherit(BI.Widget, {
-        getWidth: function() {
-            return document.body.clientWidth;
-        },
-
         render: function() {
             var self = this;
             return {
@@ -475,7 +421,6 @@ if (!window.Dec) {
                         type: "bi.vertical",
                         vgap: 15,
                         hgap: 10,
-                        width: self.getWidth() * 0.6369,
                         items: [{
                             type: "bi.label",
                             text: "以下 api 路径均以 https://cnodejs.org/api/v1 为前缀",
@@ -1015,9 +960,6 @@ if (!window.Dec) {
     BI.shortcut("dec.body.content.api", Content);
 })();!(function() {
     var Content = BI.inherit(BI.Widget, {
-        getWidth: function() {
-            return document.body.clientWidth;
-        },
         render: function() {
             var self = this;
             return {
@@ -1055,7 +997,6 @@ if (!window.Dec) {
                         type: "bi.vertical",
                         vgap: 15,
                         hgap: 10,
-                        width: self.getWidth() * 0.6369,
                         items: [{
                             type: "bi.label",
                             text: "Node.js入门",
@@ -1253,9 +1194,6 @@ if (!window.Dec) {
         _store: function() {
             return BI.Models.getModel("dec.model.body.content.index");
         },
-        getWidth: function() {
-            return document.body.clientWidth;
-        },
 
         watch: {
             topicList: function(val) {
@@ -1274,79 +1212,86 @@ if (!window.Dec) {
 
         _formatItems: function(items) {
             var self = this;
-            // return BI.map(items, function(i, tab) {
-            //     return BI.extend({
-            //         handler: function() {
-            //             self.store.selectTab(tab.value);
-            //         }
-            //     }, tab);
-            // });
-
             return BI.map(items, function(index, value) {
                 return {
-                    type: "bi.vertical_adapt",
+                    type: "bi.htape",
                     height: 50,
                     hgap: 5,
                     cls: "bi-border-bottom",
                     items: [{
-                        type: "bi.image_button",
-                        src: value.author.avatar_url,
-                        title: value.author.loginname,
-                        height: 30,
-                        width: 30
-                    }, {
-                        type: "bi.vertical_adapt",
-                        height: 30,
-                        width: 70,
-                        items: [{
-                            type: "bi.label",
-                            title: "回复数",
-                            cls: "reply-num",
-                            text: value.reply_count
-                        }, {
-                            type: "bi.label",
-                            text: "/"
-                        }, {
-                            type: "bi.label",
-                            title: "点击数",
-                            cls: "click-num",
-                            text: value.visit_count
-                        }]
-                    }, {
-                        type: "bi.label",
-                        text: value.top ? "置顶" : (value.good ? "精华" : (value.tab ? flag[value.tab] : flag["default"])),
-                        cls: (value.top || value.good) ? "special-bar" : "normal-bar"
-                        // width: 32,
-                        // height: 18
-                    }, {
-                        type: "bi.text_button",
-                        width: self.getWidth() * 0.4539,
-                        text: value.title,
-                        title: value.title,
-                        textAlign: "left",
-                        handler: function() {
-                            self.store.getPage(value);
+                        width: 30,
+                        el: {
+                            type: "bi.vertical_adapt",
+                            items: [{
+                                type: "bi.image_button",
+                                src: value.author.avatar_url,
+                                title: value.author.loginname,
+                                height: 30,
+                                width: 30
+                            }]
                         }
                     }, {
-                        type: "bi.vertical_adapt",
-                        // width: 120,
-                        lgap: self.getWidth() * 0.02196,
-                        items: [
-                            // {
-                            //     type: "bi.image_button",
-                            //     src: "",
-                            //     width: 18,
-                            //     lgap: 40,
-                            // },
-                            {
+                        width: 70,
+                        el: {
+                            type: "bi.vertical_adapt",
+                            items: [{
+                                type: "bi.vertical_adapt",
+                                height: 30,
+                                items: [{
+                                    type: "bi.label",
+                                    title: "回复数",
+                                    cls: "reply-num",
+                                    text: value.reply_count
+                                }, {
+                                    type: "bi.label",
+                                    text: "/"
+                                }, {
+                                    type: "bi.label",
+                                    title: "点击数",
+                                    cls: "click-num",
+                                    text: value.visit_count
+                                }]
+                            }]
+                        }
+                    }, {
+                        width: 40,
+                        el: {
+                            type: "bi.vertical_adapt",
+                            items: [{
+                                type: "bi.label",
+                                text: value.top ? "置顶" : (value.good ? "精华" : (value.tab ? flag[value.tab] : flag["default"])),
+                                cls: (value.top || value.good) ? "special-bar" : "normal-bar",
+                                height: 18,
+                                width: 32
+                            }]
+                        }
+                    }, {
+                        width: "fill",
+                        el: {
+                            type: "bi.vertical_adapt",
+                            items: [{
+                                type: "bi.text_button",
+                                width: self.getWidth() * 0.4539,
+                                text: value.title,
+                                title: value.title,
+                                textAlign: "left",
+                                handler: function() {
+                                    self.store.getPage(value);
+                                }
+                            }]
+                        }
+                    }, {
+                        width: 56,
+                        el: {
+                            type: "bi.vertical_adapt",
+                            items: [{
                                 type: "bi.label",
                                 width: 56,
                                 textAlign: "right",
-                                // lgap: 45,
                                 text: formatReplyTime(value.last_reply_at),
                                 title: formatReplyTime(value.last_reply_at)
-                            }
-                        ]
+                            }]
+                        }
                     }]
                 };
             });
@@ -1356,11 +1301,8 @@ if (!window.Dec) {
             var self = this;
             return {
                 type: "bi.vertical",
-                vgap: 0,
-                hgap: 0,
                 items: [{
-                    type: "dec.body.tabs",
-                    height: 24
+                    type: "dec.body.tabs"
                 }, {
                     type: "bi.list_view",
                     ref: function() {
@@ -1369,32 +1311,32 @@ if (!window.Dec) {
                     items: [{}],
                     cls: "bi-border-bottom topic-bar"
                 }, {
-                    type: "bi.pager",
-                    dynamicShow: false,
-                    dynamicShowFirstLast: true,
-                    height: 26,
-                    pages: 100,
-                    groups: 5,
-                    curr: 1,
-                    first: "首页>",
-                    last: "<尾页",
-                    jump: function(page) {
-                        self.store.getList(page.curr);
-                    },
+                    type: "bi.vertical",
                     cls: "page-bar",
-                    ref: function() {
-                        self.pagelist = this;
-                        // items: [{}]
-                    }
+                    items: [{
+                        type: "bi.pager",
+                        dynamicShow: false,
+                        dynamicShowFirstLast: true,
+                        height: 26,
+                        pages: 100,
+                        groups: 5,
+                        curr: 1,
+                        first: "首页>",
+                        last: "<尾页",
+                        jump: function(page) {
+                            self.store.getList(page.curr);
+                        },
+                        tgap: 5,
+                        bgap: 5,
+                        ref: function() {
+                            self.pagelist = this;
+                        }
+                    }]
                 }]
             };
         }
 
     });
-
-    // function formatReplyTime(val) {
-    //     return val;
-    // }
 
     BI.shortcut("dec.body.content.index", Index);
 })();!(function() {
@@ -1404,8 +1346,6 @@ if (!window.Dec) {
             this.platform = Dec.platformModel;
             // console.log(Dec.platformModel);
             var self = this;
-            // console.log(self.platform);
-            // console.log(self.platform.topicList);
             self.platform.selectedTab = "all";
             $.ajax({
                 url: "https://cnodejs.org/api/v1/topics",
@@ -1458,7 +1398,6 @@ if (!window.Dec) {
                     },
                     success: function(res) {
                         self.platform.topicList = res.data;
-                        // window.scrollTo(0, 0);
                     }
                 });
             }
@@ -1475,9 +1414,6 @@ if (!window.Dec) {
         _store: function() {
             return BI.Models.getModel("dec.model.body.content.page");
         },
-        getWidth: function() {
-            return document.body.clientWidth;
-        },
 
         watch: {
             topicPage: function(val) {
@@ -1493,76 +1429,94 @@ if (!window.Dec) {
             return [{
                 type: "bi.vertical",
                 items: [{
-                    type: "bi.vertical",
-                    cls: "page-content",
-                    items: [{
-                        // type: "bi.label",
-                        // text: "test"
-                        type: "bi.horizontal",
+                    tgap: 10,
+                    el: {
+                        type: "bi.vertical",
+                        cls: "page-content",
                         items: [{
-                            type: "bi.label",
-                            text: value.top ? '置顶' : (value.good ? '精华' : (value.tab ? flag[value.tab] : flag["default"])),
-                            cls: (value.top || value.good) ? 'special-bar' : 'normal-bar'
-                        }, {
-                            type: "bi.label",
-                            text: value.title,
-                            lgap: 5,
-                            cls: "page-title",
-                            whiteSpace: "normal",
-                            width: self.getWidth() * 0.48755,
-                            textAlign: "left"
-                        }]
-                    }, {
-                        type: "bi.center_adapt",
-                        cls: "page-info bi-border-bottom",
-                        items: [{
-                            type: "bi.left",
+                            type: "bi.vertical_adapt",
+                            lgap: 10,
+                            tgap: 10,
                             items: [{
                                 type: "bi.label",
-                                lgap: 5,
-                                text: "·发布于" + formatReplyTime(value.create_at)
+                                width: 32,
+                                height: 18,
+                                text: value.top ? '置顶' : (value.good ? '精华' : (value.tab ? flag[value.tab] : flag["default"])),
+                                cls: (value.top || value.good) ? 'special-bar' : 'normal-bar'
                             }, {
                                 type: "bi.label",
+                                text: value.title,
                                 lgap: 5,
-                                text: "·作者" + value.author.loginname
-                            }, {
-                                type: "bi.label",
-                                lgap: 5,
-                                text: "·" + value.visit_count + "次浏览"
-                            }, {
-                                type: "bi.label",
-                                lgap: 5,
-                                text: "·来自 " + flag[value.tab]
+                                cls: "page-title",
+                                whiteSpace: "normal",
+                                textAlign: "left"
                             }]
                         }, {
-                            type: "bi.right",
+                            type: "bi.center_adapt",
+                            cls: "page-info bi-border-bottom",
+                            lgap: 10,
+                            bgap: 10,
                             items: [{
-                                type: "bi.button",
-                                cls: "collect-button",
-                                rgap: 10,
-                                text: "收藏"
+                                type: "bi.left",
+                                items: [{
+                                    type: "bi.label",
+                                    lgap: 5,
+                                    text: "·发布于" + formatReplyTime(value.create_at)
+                                }, {
+                                    type: "bi.label",
+                                    lgap: 5,
+                                    text: "·作者" + value.author.loginname
+                                }, {
+                                    type: "bi.label",
+                                    lgap: 5,
+                                    text: "·" + value.visit_count + "次浏览"
+                                }, {
+                                    type: "bi.label",
+                                    lgap: 5,
+                                    text: "·来自 " + flag[value.tab]
+                                }]
+                            }, {
+                                type: "bi.right",
+                                items: [{
+                                    type: "bi.button",
+                                    cls: "collect-button",
+                                    rgap: 10,
+                                    text: "收藏",
+                                    width: 52,
+                                    height: 34
+                                }]
                             }]
+                        }, {
+                            type: "bi.center_adapt",
+                            cls: "page-content-body",
+                            lgap: 20,
+                            tgap: 20,
+                            bgap: 20
                         }]
-                    }, {
-                        type: "bi.center_adapt",
-                        cls: "page-content-body",
-                        // items: [{
-                        //     type: "bi.label",
-                        //     text: value.content
-                        // }]
-                    }]
+                    }
                 }, {
-                    type: "bi.vertical",
-                    cls: "page-content",
-                    items: [{
-                        type: "bi.label",
-                        cls: "bi-border-bottom bi-background reply-title",
-                        text: value.reply_count + "条回复",
-                        textAlign: "left"
-                    }, {
-                        type: "bi.list_view",
-                        items: self._formatReplyList(value.replies)
-                    }]
+                    tgap: 30,
+                    el: {
+                        type: "bi.vertical",
+                        cls: "page-content",
+                        items: [{
+                            type: "bi.vertical",
+                            cls: "bi-border-bottom bi-background reply-title",
+                            items: [{
+                                el: {
+                                    type: "bi.label",
+                                    text: value.reply_count + "条回复",
+                                    textAlign: "left"
+                                },
+                                tgap: 15,
+                                lgap: 15,
+                                bgap: 10
+                            }]
+                        }, {
+                            type: "bi.list_view",
+                            items: self._formatReplyList(value.replies)
+                        }]
+                    }
                 }]
             }];
         },
@@ -1610,7 +1564,6 @@ if (!window.Dec) {
                         }]
                     }, {
                         type: "bi.label",
-                        width: self.getWidth() * 0.549,
                         lgap: 30,
                         whiteSpace: "normal",
                         textAlign: "left",
@@ -1645,18 +1598,11 @@ if (!window.Dec) {
             topicPage: function() {
                 return this.platform.topicPage;
             }
-        },
-
-        actions: {
-
         }
     });
     BI.model("dec.model.body.content.page", Store);
 })();!(function() {
     var Content = BI.inherit(BI.Widget, {
-        getWidth: function() {
-            return document.body.clientWidth;
-        },
         render: function() {
             var self = this;
             return {
@@ -1693,7 +1639,6 @@ if (!window.Dec) {
                     height: 260,
                     items: [{
                         type: "bi.vertical",
-                        width: self.getWidth() * 0.6515,
                         height: 240,
                         items: [{
                             type: "bi.vertical_adapt",
@@ -1701,14 +1646,14 @@ if (!window.Dec) {
                             items: [{
                                 type: "bi.label",
                                 text: "用户名",
-                                width: self.getWidth() * 0.117,
+                                width: 160,
                                 height: 25,
                                 cls: "input-label",
                                 textAlign: "right"
                             }, {
                                 el: {
                                     type: "bi.text_editor",
-                                    width: self.getWidth() * 0.208,
+                                    width: 280,
                                     height: 30
                                 },
                                 lgap: 15
@@ -1719,14 +1664,14 @@ if (!window.Dec) {
                             items: [{
                                 type: "bi.label",
                                 text: "密码",
-                                width: self.getWidth() * 0.117,
+                                width: 160,
                                 height: 25,
                                 cls: "input-label",
                                 textAlign: "right"
                             }, {
                                 el: {
                                     type: "bi.text_editor",
-                                    width: self.getWidth() * 0.208,
+                                    width: 280,
                                     height: 30
                                 },
                                 lgap: 15
@@ -1739,7 +1684,7 @@ if (!window.Dec) {
                                     type: "bi.button",
                                     text: "登录",
                                     cls: "login-button",
-                                    width: self.getWidth() * 0.038,
+                                    width: 80,
                                     height: 34
                                 },
                                 lgap: 175
@@ -1748,7 +1693,7 @@ if (!window.Dec) {
                                     type: "bi.button",
                                     text: "通过GitHub登录",
                                     cls: "github-login-button",
-                                    width: self.getWidth() * 0.1098,
+                                    width: 150,
                                     height: 34
                                 },
                                 lgap: 10
@@ -1773,209 +1718,6 @@ if (!window.Dec) {
             return BI.Models.getModel("dec.model.body.sidebar");
         },
 
-        // default_sidebar: [{
-        //     type: "bi.vertical",
-        //     height: 116,
-        //     vgap: 10,
-        //     cls: "side-bar",
-        //     items: [{
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         items: [{
-        //             type: "bi.label",
-        //             text: "CNode：Node.js专业中文社区"
-        //         }]
-        //     }, {
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         items: [{
-        //             type: "bi.label",
-        //             text: "您可以"
-        //         }, {
-        //             type: "bi.text_button",
-        //             text: "登录",
-        //             cls: "sign-bar",
-        //             handler: function() {}
-        //         }, {
-        //             type: "bi.label",
-        //             text: "或"
-        //         }, {
-        //             type: "bi.text_button",
-        //             text: "注册",
-        //             cls: "sign-bar",
-        //             handler: function() {
-        //                 window.location.href = "https://github.com/login?client_id=0625d398dd9166a196e9&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3D0625d398dd9166a196e9%26redirect_uri%3Dhttps%253A%252F%252Fcnodejs.org%252Fauth%252Fgithub%252Fcallback%26response_type%3Dcode";
-        //             }
-        //         }, {
-        //             type: "bi.label",
-        //             text: "也可以"
-        //         }]
-        //     }, {
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         items: [{
-        //             type: "bi.button",
-        //             height: 34,
-        //             text: "通过 GiHub 登录",
-        //             handler: function() {
-        //                 window.location.href = "https://github.com/login/oauth/authorize?response_type=code&redirect_uri=https%3A%2F%2Fcnodejs.org%2Fauth%2Fgithub%2Fcallback&client_id=0625d398dd9166a196e9";
-        //             }
-        //         }]
-        //     }]
-        // }, {
-        //     type: "bi.vertical",
-        //     cls: "side-bar",
-        //     vgap: 10,
-        //     height: 310,
-        //     items: [{
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         items: [{
-        //             type: "bi.image_button",
-        //             src: "https://dn-cnode.qbox.me/FlajCCXkxZaOsuWp3k0iaiqfrJaS",
-        //             width: 270,
-        //         }]
-        //     }, {
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         items: [{
-        //             type: "bi.image_button",
-        //             src: "https://dn-cnode.qbox.me/Fv9R31Y6ySKKJi95ldk9TRkJ7o5O",
-        //             width: 270,
-        //         }]
-        //     }, {
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         items: [{
-        //             type: "bi.image_button",
-        //             src: "https://dn-cnode.qbox.me/Fn4D6BhOTz1IswvmzeZ1q7QW1ls_",
-        //             width: 270,
-        //         }]
-        //     }, {
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         items: [{
-        //             type: "bi.image_button",
-        //             src: "https://render.alipay.com/p/s/taobaonpm_click/image_25",
-        //             width: 270,
-        //         }]
-        //     }]
-        // }, {
-        //     type: "bi.vertical",
-        //     vgap: 10,
-        //     height: 220,
-        //     cls: "side-bar",
-        //     items: [{
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         cls: "title-bar",
-        //         items: [{
-        //             type: "bi.label",
-        //             text: "无人回复的话题"
-        //         }]
-        //     }]
-        // }, {
-        //     type: "bi.vertical",
-        //     vgap: 10,
-        //     height: 220,
-        //     cls: "side-bar",
-        //     items: [{
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         cls: "title-bar",
-        //         items: [{
-        //             type: "bi.label",
-        //             text: "积分榜"
-        //         }, {
-        //             type: "bi.text_button",
-        //             text: "TOP 100 >>"
-        //         }]
-        //     }]
-        // }, {
-        //     type: "bi.vertical",
-        //     vgap: 10,
-        //     height: 283,
-        //     cls: "side-bar",
-        //     items: [{
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         cls: "title-bar",
-        //         items: [{
-        //             type: "bi.label",
-        //             text: "友情社区"
-        //         }]
-        //     }, {
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         items: [{
-        //             type: "bi.image_button",
-        //             src: "https://o4j806krb.qnssl.com/public/images/ruby-china-20150529.png",
-        //             width: 270,
-        //             height: 50
-        //         }]
-        //     }, {
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         items: [{
-        //             type: "bi.image_button",
-        //             src: "https://o4j806krb.qnssl.com/public/images/golangtc-logo.png",
-        //             width: 270,
-        //             height: 50
-        //         }]
-        //     }, {
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         items: [{
-        //             type: "bi.image_button",
-        //             src: "https://o4j806krb.qnssl.com/public/images/phphub-logo.png",
-        //             width: 270,
-        //             height: 50
-        //         }]
-        //     }, {
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         items: [{
-        //             type: "bi.image_button",
-        //             src: "https://dn-cnode.qbox.me/FjLUc7IJ2--DqS706etPQ1EGajxK",
-        //             width: 270,
-        //             height: 50
-        //         }]
-        //     }]
-        // }, {
-        //     type: "bi.vertical",
-        //     vgap: 10,
-        //     height: 286,
-        //     cls: "side-bar",
-        //     items: [{
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         cls: "title-bar",
-        //         items: [{
-        //             type: "bi.label",
-        //             text: "客户端二维码"
-        //         }]
-        //     }, {
-        //         type: "bi.horizontal_adapt",
-        //         items: [{
-        //             type: "bi.image_button",
-        //             src: "https://dn-cnode.qbox.me/FtG0YVgQ6iginiLpf9W4_ShjiLfU",
-        //             width: 200,
-        //             height: 200
-        //         }]
-        //     }, {
-        //         type: "bi.horizontal_adapt",
-        //         items: [{
-        //             type: "bi.text_button",
-        //             width: 100,
-        //             cls: "client-code-link",
-        //             text: "客户端源码地址",
-        //             handler: function() {
-        //                 window.location.href = "https://github.com/soliury/noder-react-native";
-        //             }
-        //         }]
-        //     }]
-        // }],
-
         watch: {
             sidebarInfo: function(val) {
                 console.log("the sidebar is changing...");
@@ -1984,26 +1726,22 @@ if (!window.Dec) {
                 if (Dec.platformModel.selectedHash == "getpage") {
                     this.content.populate(this._formatItems(val));
                 }
-                // console.log(this._formatDefault());
             },
             selectedHash: function(val) {
                 // console.log(val);
-                // console.log(default_sidebar);
                 if (val != "getpage") {
-                    if (val == "api") {
-                        console.log("sidebarinfo: api-none!");
-                        this.content.populate([]);
-                        return;
-                    }
+                    // if (val == "api") {
+                    //     console.log("sidebarinfo: api-none!");
+                    //     this.content.populate([]);
+                    //     return;
+                    // }
                     if (val == "signin") {
                         console.log("sidebarinfo: signin!");
                         this.content.populate(this._formatSignin());
                         return;
                     }
                     console.log("sidebarinfo: defult!");
-                    // console.log(default_sidebar);
                     this.content.populate(this._formatDefault());
-                    // this.content.populate(this.default_sidebar);
                 }
             }
         },
@@ -2011,42 +1749,62 @@ if (!window.Dec) {
         _formatSignin: function() {
             return [{
                 type: "bi.vertical",
-                height: 246,
-                vgap: 12,
-                lgap: 15,
                 cls: "side-bar",
+                tgap: 10,
                 items: [{
-                    type: "bi.horizontal",
-                    hgap: 5,
+                    type: "bi.vertical",
                     cls: "title-bar",
                     items: [{
-                        type: "bi.label",
-                        text: "关于"
+                        el: {
+                            type: "bi.label",
+                            text: "关于",
+                            textAlign: "left"
+                        },
+                        lgap: 16
                     }]
                 }, {
-                    type: "bi.label",
-                    textAlign: "left",
-                    text: "CNode：Node.js专业中文社区"
+                    el: {
+                        type: "bi.label",
+                        textAlign: "left",
+                        text: "CNode：Node.js专业中文社区"
+                    },
+                    lgap: 16
                 }, {
-                    type: "bi.label",
-                    textAlign: "left",
-                    text: "在这里你可以："
+                    el: {
+                        type: "bi.label",
+                        textAlign: "left",
+                        text: "在这里你可以："
+                    },
+                    lgap: 16
                 }, {
-                    type: "bi.label",
-                    textAlign: "left",
-                    text: "  ·  向别人提出你遇到的问题"
+                    el: {
+                        type: "bi.label",
+                        textAlign: "left",
+                        text: "  ·  向别人提出你遇到的问题"
+                    },
+                    lgap: 16
                 }, {
-                    type: "bi.label",
-                    textAlign: "left",
-                    text: "  ·  帮助遇到问题的人"
+                    el: {
+                        type: "bi.label",
+                        textAlign: "left",
+                        text: "  ·  帮助遇到问题的人"
+                    },
+                    lgap: 16
                 }, {
-                    type: "bi.label",
-                    textAlign: "left",
-                    text: "  ·  分享自己的知识"
+                    el: {
+                        type: "bi.label",
+                        textAlign: "left",
+                        text: "  ·  分享自己的知识"
+                    },
+                    lgap: 16
                 }, {
-                    type: "bi.label",
-                    textAlign: "left",
-                    text: "  ·  和其它人一起进步"
+                    el: {
+                        type: "bi.label",
+                        textAlign: "left",
+                        text: "  ·  和其它人一起进步"
+                    },
+                    lgap: 16,
+                    bgap: 20
                 }]
             }];
         },
@@ -2348,6 +2106,7 @@ if (!window.Dec) {
             var self = this;
             return {
                 type: "bi.vertical",
+                width: 290,
                 ref: function() {
                     self.content = this;
                 },
@@ -2363,17 +2122,6 @@ if (!window.Dec) {
             this.platform = Dec.platformModel;
             // console.log(Dec.platformModel);
             var self = this;
-            // $.ajax({
-            //     url: "https://cnodejs.org/api/v1/topics",
-            //     data: {
-            //         tab: "all",
-            //         page: 1
-            //     },
-            //     success: function(res) {
-            //         self.platform.sidebarInfo["noReplyTopic"] = res.data;
-            //         // console.log(self.platform.topicList);
-            //     }
-            // });
         },
 
         computed: {
@@ -2427,8 +2175,7 @@ if (!window.Dec) {
             var self = this;
             return {
                 type: "bi.vertical",
-                // element: this,
-                // vgap: 10,
+                tgap: 10,
                 cls: "tab-container",
                 items: [{
                     type: "bi.button_group",
@@ -2437,7 +2184,6 @@ if (!window.Dec) {
                     },
                     layouts: [{
                         type: "bi.horizontal_adapt",
-                        // htape: 10
                     }],
                     scrollx: true,
                     cls: "tab-bar",
@@ -2460,7 +2206,6 @@ if (!window.Dec) {
                     return {
                         type: "bi.text_button",
                         cls: "bi-list-item-select",
-                        // width: 70,
                         height: 24,
                         value: tab.value,
                         text: tab.text,
@@ -2495,93 +2240,99 @@ if (!window.Dec) {
         render: function() {
             return {
                 type: "bi.vertical",
-                vgap: 20,
-                height: 220,
+                height: 190,
                 cls: "footer-bar",
                 items: [{
-                    type: "bi.horizontal",
-                    hgap: 10,
+                    type: "bi.vertical",
+                    lgap: 25,
                     items: [{
-                        type: "bi.text_button",
-                        text: "RSS",
-                        cls: "code-link",
-                        handler: function() {
-                            window.location.href = "https://cnodejs.org/rss";
-                        }
+                        type: "bi.horizontal",
+                        hgap: 10,
+                        tgap: 20,
+                        items: [{
+                            type: "bi.text_button",
+                            text: "RSS",
+                            cls: "code-link",
+                            handler: function() {
+                                window.location.href = "https://cnodejs.org/rss";
+                            }
+                        }, {
+                            type: "bi.label",
+                            text: "|"
+                        }, {
+                            type: "bi.text_button",
+                            text: "源码地址",
+                            cls: "code-link",
+                            handler: function() {
+                                window.location.href = "https://cnodejs.org/rss";
+                            }
+                        }]
                     }, {
-                        type: "bi.label",
-                        text: "|"
-                    }, {
-                        type: "bi.text_button",
-                        text: "源码地址",
-                        cls: "code-link",
-                        handler: function() {
-                            window.location.href = "https://cnodejs.org/rss";
-                        }
-                    }]
-                }, {
-                    type: "bi.horizontal",
-                    hgap: 10,
-                    items: [{
-                        type: "bi.label",
-                        text: "CNode 社区为国内最专业的 Node.js 开源技术社区，致力于 Node.js 的技术研究。"
-                    }]
-                }, {
-                    type: "bi.horizontal",
-                    hgap: 10,
-                    items: [{
-                        type: "bi.vertical_adapt",
+                        type: "bi.horizontal",
+                        hgap: 10,
+                        // tgap: 20,
                         items: [{
                             type: "bi.label",
-                            text: "服务器赞助商为"
-                        }, {
-                            type: "bi.image_button",
-                            src: "https://dn-cnode.qbox.me/FuIpEaM9bvsZKnQ3QfPtBHWQmLM9",
-                            width: 92,
-                            height: 18,
-                            handler: function() {
-                                window.location.href = "https://www.ucloud.cn/?utm_source=zanzhu&utm_campaign=cnodejs&utm_medium=display&utm_content=yejiao&ytag=cnodejs_logo";
-                            }
-                        }, {
-                            type: "bi.label",
-                            text: "，存储赞助商为"
-                        }, {
-                            type: "bi.image_button",
-                            src: "https://dn-cnode.qbox.me/Fg0jtDIcTqVC049oVu5-sn6Om4NX",
-                            width: 115,
-                            height: 44,
-                            handler: function() {
-                                window.location.href = "http://www.qiniu.com/?ref=cnode";
-                            }
-                        }, {
-                            type: "bi.label",
-                            text: "，由"
-                        }, {
-                            type: "bi.image_button",
-                            src: "https://dn-cnode.qbox.me/FpMZk31PDyxkC8yStmMQL4XroaGD",
-                            width: 166,
-                            height: 54,
-                            handler: function() {
-                                window.location.href = "https://www.aliyun.com/product/nodejs?ref=cnode";
-                            }
-                        }, {
-                            type: "bi.label",
-                            text: "提供应用性能服务。"
+                            text: "CNode 社区为国内最专业的 Node.js 开源技术社区，致力于 Node.js 的技术研究。"
                         }]
-                    }]
-                }, {
-                    type: "bi.horizontal",
-                    hgap: 10,
-                    items: [{
-                        type: "bi.label",
-                        text: "新手搭建 Node.js 服务器，推荐使用无需备案的"
                     }, {
-                        type: "bi.text_button",
-                        cls: "link-bar",
-                        text: "DigitalOcean(https://www.digitalocean.com/)",
-                        handler: function() {
-                            window.location.href = "https://www.digitalocean.com/?refcode=eba02656eeb3";
-                        }
+                        type: "bi.horizontal",
+                        hgap: 10,
+                        // tgap: 20,
+                        items: [{
+                            type: "bi.vertical_adapt",
+                            items: [{
+                                type: "bi.label",
+                                text: "服务器赞助商为"
+                            }, {
+                                type: "bi.image_button",
+                                src: "https://dn-cnode.qbox.me/FuIpEaM9bvsZKnQ3QfPtBHWQmLM9",
+                                width: 92,
+                                height: 18,
+                                handler: function() {
+                                    window.location.href = "https://www.ucloud.cn/?utm_source=zanzhu&utm_campaign=cnodejs&utm_medium=display&utm_content=yejiao&ytag=cnodejs_logo";
+                                }
+                            }, {
+                                type: "bi.label",
+                                text: "，存储赞助商为"
+                            }, {
+                                type: "bi.image_button",
+                                src: "https://dn-cnode.qbox.me/Fg0jtDIcTqVC049oVu5-sn6Om4NX",
+                                width: 115,
+                                height: 44,
+                                handler: function() {
+                                    window.location.href = "http://www.qiniu.com/?ref=cnode";
+                                }
+                            }, {
+                                type: "bi.label",
+                                text: "，由"
+                            }, {
+                                type: "bi.image_button",
+                                src: "https://dn-cnode.qbox.me/FpMZk31PDyxkC8yStmMQL4XroaGD",
+                                width: 166,
+                                height: 54,
+                                handler: function() {
+                                    window.location.href = "https://www.aliyun.com/product/nodejs?ref=cnode";
+                                }
+                            }, {
+                                type: "bi.label",
+                                text: "提供应用性能服务。"
+                            }]
+                        }]
+                    }, {
+                        type: "bi.horizontal",
+                        hgap: 10,
+                        items: [{
+                            type: "bi.label",
+                            text: "新手搭建 Node.js 服务器，推荐使用无需备案的"
+                        }, {
+                            type: "bi.text_button",
+                            cls: "link-bar",
+                            text: "DigitalOcean(https://www.digitalocean.com/)",
+                            handler: function() {
+                                window.location.href = "https://www.digitalocean.com/?refcode=eba02656eeb3";
+                            }
+                        }]
                     }]
                 }]
             };
@@ -2622,13 +2373,6 @@ if (!window.Dec) {
     var min = parseInt(temp / 60);
     return min + '分钟前';
 }!(function() {
-    // BI.constant("dec.constant.header.items", [{
-    //     value: "标签一",
-    //     action: "dec.action.header.action1"
-    // }, {
-    //     value: "标签二",
-    //     action: "dec.action.header.action2"
-    // }]);
     BI.constant("dec.constant.header.hashes", [{
         text: "首页",
         value: "index"
@@ -2653,43 +2397,34 @@ if (!window.Dec) {
         _store: function() {
             return BI.Models.getModel("dec.model.header");
         },
-        getWidth: function() {
-            return document.body.clientWidth;
-        },
         watch: {
-            // selectedHeader: function(val) {
-            //     this.list.setValue(val);
-            // },
             selectedHash: function(val) {
                 this.hash.setValue(val);
             }
         },
-
         render: function() {
             var self = this;
             return {
                 type: "bi.left_right_vertical_adapt",
                 cls: "header-panel",
-                lhgap: self.getWidth() * 0.0073,
-                rhgap: self.getWidth() * 0.022,
+                lhgap: 10,
+                rhgap: 30,
+                height: 50,
                 items: {
                     left: [{
                         type: "bi.image_button",
                         src: "https://o4j806krb.qnssl.com/public/images/cnodejs_light.svg",
-                        width: self.getWidth() * 0.0876,
+                        width: 120,
                         height: 30,
+                        lgap: 30,
                         handler: function() {
                             self.store.selectHash("index");
                         }
                     }, {
                         type: "bi.clear_editor",
                         cls: "search-bar",
-                        width: self.getWidth() * 0.123,
-                        height: 26,
-                        handler: function() {
-                            // console.log(self);
-                            // self.style.cssText = "background: #fff;";
-                        }
+                        width: 233,
+                        height: 26
                     }],
                     right: [{
                         type: "bi.button_group",
@@ -2705,7 +2440,7 @@ if (!window.Dec) {
                         }],
                         layouts: [{
                             type: "bi.vertical_adapt",
-                            hgap: self.getWidth() * 0.01464
+                            hgap: 20
                         }],
                         items: this.model.hashes
                     }]
@@ -2720,35 +2455,10 @@ if (!window.Dec) {
         _init: function() {
             this.platform = Dec.platformModel;
         },
-        state: function() {
-            return {
-                index: -1
-            };
-        },
-        // context: ["testContext", "$selector"],
         computed: {
-            // selectedHeader: function () {
-            //     return this.platform.selectedHeader;
-            // },
             selectedHash: function() {
                 return this.platform.selectedHash;
             },
-            // items: function () {
-            //     var self = this;
-            //     return BI.map(
-            //         BI.Constants.getConstant("dec.constant.header.items"),
-            //         function (i, item) {
-            //             return BI.extend(
-            //                 {
-            //                     type: "bi.text_button",
-            //                     cls: "bi-list-item-select",
-            //                     selected: item.value === self.platform.selectedHeader
-            //                 },
-            //                 item
-            //             );
-            //         }
-            //     );
-            // },
             hashes: function() {
                 var self = this;
                 return BI.map(
@@ -2756,7 +2466,6 @@ if (!window.Dec) {
                     function(i, item) {
                         return BI.extend({
                                 type: "bi.text_button",
-                                // cls: "bi-list-item-select",
                                 selected: item.value === self.platform.selectedHash
                             },
                             item
@@ -2769,137 +2478,30 @@ if (!window.Dec) {
             hash: function(hash) {
                 this.platform.selectedHash = hash;
             }
-            // testContext: function () {
-            //     this.model.testContext = Math.random();
-            // },
-            // modifyDimensionName: function () {
-            //     this.model.$selector.getSelector("widgets.xxID.dimensions.xxID").data.name = "修改后的维度名" + index++;
-            // },
-            // testPoint: function () {
-
-            // }
         }
     });
     BI.model("dec.model.header", Store);
 })();!(function() {
-    // var layoutStrategy;
-    // var header, nav, body;
     var Widget = BI.inherit(BI.Widget, {
-        // _store: function() {
-        //     return BI.Models.getModel("dec.model.main");
-        // },
-        // _defaultConfig: function() {
-        //     return BI.extend(Widget.superclass._defaultConfig.apply(this), {});
-        // },
-
-        // watch: {
-        //     selectedHash: function(hash) {
-        //         BI.history.navigate(hash);
-        //     }
-        // },
-
         render: function() {
             return {
                 type: "bi.vertical",
-                vgap: 20,
                 items: [{
-                        type: "dec.header",
-                        cls: "bi-border-bottom"
-                        // text: "垂直布局",
-                        // height: 30
-                    }, {
-                        type: "dec.body",
-                        // text: "垂直布局",
-                        // height: 30
-                    },
-                    // {
-                    //     type: "dec.nav",
-                    //     cls: "bi-border-top bi-border-bottom bi-border-left"
-                    //     // text: "垂直布局",
-                    //     // height: 30
-                    // },
-                    {
-                        type: "dec.footer",
-                        cls: "bi-border-top",
-                        tgap: 80
-                        // text: "垂直布局",
-                        // height: 30
-                    }
-                ]
+                    type: "dec.header",
+                    cls: "bi-border-bottom",
+                    bgap: 20
+                }, {
+                    type: "dec.body",
+                    bgap: 60
+                }, {
+                    type: "dec.footer",
+                    cls: "bi-border-top",
+                }]
             };
         }
     });
     BI.shortcut("dec.app", Widget);
-
-    // Dec.injection.injectLayoutStrategy = function(_layoutStrategy) {
-    //     layoutStrategy = _layoutStrategy;
-    // };
-
-    // Dec.injection.injectHeader = function(_header) {
-    //     header = _header;
-    // };
-    // Dec.injection.injectNav = function(_nav) {
-    //     nav = _nav;
-    // };
-    // Dec.injection.injectBody = function(_body) {
-    //     body = _body;
-    // };
-})();// !(function() {
-
-//     var Store = BI.inherit(Fix.Model, {
-//         _init: function() {
-//             this.platform = Dec.platformModel;
-//         },
-//         childContext: ["testContext", "$selector"],
-//         state: function() {
-//             return {
-//                 testContext: "",
-//                 config: {
-//                     widgets: {},
-//                     style: {}
-//                 }
-//             };
-//         },
-//         watch: {
-//             "config.**": {
-//                 sync: true,
-//                 handler: function(newValue, oldValue, options) {
-//                     var ob = options.observer;
-//                     var keys = [];
-//                     while (ob.parent) {
-//                         keys.unshift(ob.parentKey);
-//                         ob = ob.parent;
-//                     }
-//                     keys = keys.slice(1);
-//                     var json = {};
-//                     json[options.key] = Fix.toJSON(options.observer.value[options.key]);
-//                     var immutable = BI.Record.latest.mergeDeepIn(keys, json);
-//                     BI.Record.modify(immutable);
-//                 }
-//             },
-//             "config.**||1": function() {
-//                 BI.Record.record();
-//             },
-//             selectedHash: function() {}
-//         },
-//         created: function() {
-//             var immutable = Immutable.fromJS(this.model.config);
-//             BI.Record.modify(immutable);
-//         },
-//         computed: {
-//             selectedHash: function() {
-//                 return this.platform.selectedHash;
-//             },
-//             $selector: function() {
-//                 this.selector = BI.createSelector(this.model.config);
-//                 this.selector.fill();
-//                 return this.selector;
-//             }
-//         }
-//     });
-//     BI.model("dec.model.main", Store);
-// })();
-!(function() {
+})();!(function() {
     Dec.platformModel = Fix.define({
         selectedHash: "index",
         // selectedHeader: "标签一",

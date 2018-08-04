@@ -8,9 +8,6 @@
         _store: function() {
             return BI.Models.getModel("dec.model.body.content.page");
         },
-        getWidth: function() {
-            return document.body.clientWidth;
-        },
 
         watch: {
             topicPage: function(val) {
@@ -26,76 +23,94 @@
             return [{
                 type: "bi.vertical",
                 items: [{
-                    type: "bi.vertical",
-                    cls: "page-content",
-                    items: [{
-                        // type: "bi.label",
-                        // text: "test"
-                        type: "bi.horizontal",
+                    tgap: 10,
+                    el: {
+                        type: "bi.vertical",
+                        cls: "page-content",
                         items: [{
-                            type: "bi.label",
-                            text: value.top ? '置顶' : (value.good ? '精华' : (value.tab ? flag[value.tab] : flag["default"])),
-                            cls: (value.top || value.good) ? 'special-bar' : 'normal-bar'
-                        }, {
-                            type: "bi.label",
-                            text: value.title,
-                            lgap: 5,
-                            cls: "page-title",
-                            whiteSpace: "normal",
-                            width: self.getWidth() * 0.48755,
-                            textAlign: "left"
-                        }]
-                    }, {
-                        type: "bi.center_adapt",
-                        cls: "page-info bi-border-bottom",
-                        items: [{
-                            type: "bi.left",
+                            type: "bi.vertical_adapt",
+                            lgap: 10,
+                            tgap: 10,
                             items: [{
                                 type: "bi.label",
-                                lgap: 5,
-                                text: "·发布于" + formatReplyTime(value.create_at)
+                                width: 32,
+                                height: 18,
+                                text: value.top ? '置顶' : (value.good ? '精华' : (value.tab ? flag[value.tab] : flag["default"])),
+                                cls: (value.top || value.good) ? 'special-bar' : 'normal-bar'
                             }, {
                                 type: "bi.label",
+                                text: value.title,
                                 lgap: 5,
-                                text: "·作者" + value.author.loginname
-                            }, {
-                                type: "bi.label",
-                                lgap: 5,
-                                text: "·" + value.visit_count + "次浏览"
-                            }, {
-                                type: "bi.label",
-                                lgap: 5,
-                                text: "·来自 " + flag[value.tab]
+                                cls: "page-title",
+                                whiteSpace: "normal",
+                                textAlign: "left"
                             }]
                         }, {
-                            type: "bi.right",
+                            type: "bi.center_adapt",
+                            cls: "page-info bi-border-bottom",
+                            lgap: 10,
+                            bgap: 10,
                             items: [{
-                                type: "bi.button",
-                                cls: "collect-button",
-                                rgap: 10,
-                                text: "收藏"
+                                type: "bi.left",
+                                items: [{
+                                    type: "bi.label",
+                                    lgap: 5,
+                                    text: "·发布于" + formatReplyTime(value.create_at)
+                                }, {
+                                    type: "bi.label",
+                                    lgap: 5,
+                                    text: "·作者" + value.author.loginname
+                                }, {
+                                    type: "bi.label",
+                                    lgap: 5,
+                                    text: "·" + value.visit_count + "次浏览"
+                                }, {
+                                    type: "bi.label",
+                                    lgap: 5,
+                                    text: "·来自 " + flag[value.tab]
+                                }]
+                            }, {
+                                type: "bi.right",
+                                items: [{
+                                    type: "bi.button",
+                                    cls: "collect-button",
+                                    rgap: 10,
+                                    text: "收藏",
+                                    width: 52,
+                                    height: 34
+                                }]
                             }]
+                        }, {
+                            type: "bi.center_adapt",
+                            cls: "page-content-body",
+                            lgap: 20,
+                            tgap: 20,
+                            bgap: 20
                         }]
-                    }, {
-                        type: "bi.center_adapt",
-                        cls: "page-content-body",
-                        // items: [{
-                        //     type: "bi.label",
-                        //     text: value.content
-                        // }]
-                    }]
+                    }
                 }, {
-                    type: "bi.vertical",
-                    cls: "page-content",
-                    items: [{
-                        type: "bi.label",
-                        cls: "bi-border-bottom bi-background reply-title",
-                        text: value.reply_count + "条回复",
-                        textAlign: "left"
-                    }, {
-                        type: "bi.list_view",
-                        items: self._formatReplyList(value.replies)
-                    }]
+                    tgap: 30,
+                    el: {
+                        type: "bi.vertical",
+                        cls: "page-content",
+                        items: [{
+                            type: "bi.vertical",
+                            cls: "bi-border-bottom bi-background reply-title",
+                            items: [{
+                                el: {
+                                    type: "bi.label",
+                                    text: value.reply_count + "条回复",
+                                    textAlign: "left"
+                                },
+                                tgap: 15,
+                                lgap: 15,
+                                bgap: 10
+                            }]
+                        }, {
+                            type: "bi.list_view",
+                            items: self._formatReplyList(value.replies)
+                        }]
+                    }
                 }]
             }];
         },
@@ -143,7 +158,6 @@
                         }]
                     }, {
                         type: "bi.label",
-                        width: self.getWidth() * 0.549,
                         lgap: 30,
                         whiteSpace: "normal",
                         textAlign: "left",

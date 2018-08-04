@@ -11,10 +11,6 @@
             topicPage: function() {
                 return this.platform.topicPage;
             }
-        },
-
-        actions: {
-
         }
     });
     BI.model("dec.model.body.content.page", Store);

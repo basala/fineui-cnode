@@ -4,17 +4,6 @@
             this.platform = Dec.platformModel;
             // console.log(Dec.platformModel);
             var self = this;
-            // $.ajax({
-            //     url: "https://cnodejs.org/api/v1/topics",
-            //     data: {
-            //         tab: "all",
-            //         page: 1
-            //     },
-            //     success: function(res) {
-            //         self.platform.sidebarInfo["noReplyTopic"] = res.data;
-            //         // console.log(self.platform.topicList);
-            //     }
-            // });
         },
 
         computed: {

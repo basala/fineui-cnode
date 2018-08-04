@@ -3,30 +3,20 @@
         _store: function() {
             return BI.Models.getModel("dec.model.body");
         },
-        getWidth: function() {
-            // console.log(document.body.clientWidth);
-            return document.body.clientWidth;
-        },
-        watch: {
-            // selectedTab: function(val) {
-            //     this.tab.setSelect(val);
-            // }
 
+        watch: {
             selectedHash: function(hash) {
                 switch (hash) {
                     case "index":
-                        // this.content.populate(items);
                         // console.log("index");
                         this.content.populate([{
-                            type: "dec.body.content.index",
-                            // height: 2110
+                            type: "dec.body.content.index"
                         }]);
                         break;
                     case "getstart":
                         // console.log("getstart");
                         this.content.populate([{
                             type: "dec.body.content.getstart"
-                            // height: 1250
                         }]);
                         break;
                     case "api":
@@ -65,40 +55,42 @@
             }
         },
 
-        beforeInit: function(callback) {
-            setTimeout(callback, 500);
-        },
-
         render: function() {
             var self = this;
-
             return {
-                type: "bi.horizontal",
-                hgap: 20,
-                lgap: self.getWidth() * 0.03,
-                ref: function() {
-                    self.body = this;
-                },
+                type: "bi.vertical",
+                lgap: 60,
+                rgap: 60,
                 items: [{
-                    type: "bi.vertical",
-                    width: self.getWidth() * 0.665,
+                    // type: "bi.horizontal",
+                    type: "bi.htape",
+                    height: 2200,
                     ref: function() {
-                        self.content = this;
+                        self.body = this;
                     },
                     items: [{
-                        // type: "bi.label",
-                        // text: "test"
-                        type: "dec.body.content.index"
-                        // height: 2110
-                    }]
-                }, {
-                    type: "bi.vertical",
-                    width: self.getWidth() * 0.212,
-                    ref: function() {
-                        self.sidevar = this;
-                    },
-                    items: [{
-                        type: "dec.body.sidebar"
+                        width: "fill",
+                        el: {
+                            type: "bi.vertical",
+                            ref: function() {
+                                self.content = this;
+                            },
+                            rgap: 16,
+                            items: [{
+                                type: "dec.body.content.index"
+                            }]
+                        }
+                    }, {
+                        width: 290,
+                        el: {
+                            type: "bi.vertical",
+                            ref: function() {
+                                self.sidebar = this;
+                            },
+                            items: [{
+                                type: "dec.body.sidebar"
+                            }]
+                        }
                     }]
                 }]
             };

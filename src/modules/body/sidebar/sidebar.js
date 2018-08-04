@@ -4,209 +4,6 @@
             return BI.Models.getModel("dec.model.body.sidebar");
         },
 
-        // default_sidebar: [{
-        //     type: "bi.vertical",
-        //     height: 116,
-        //     vgap: 10,
-        //     cls: "side-bar",
-        //     items: [{
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         items: [{
-        //             type: "bi.label",
-        //             text: "CNode：Node.js专业中文社区"
-        //         }]
-        //     }, {
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         items: [{
-        //             type: "bi.label",
-        //             text: "您可以"
-        //         }, {
-        //             type: "bi.text_button",
-        //             text: "登录",
-        //             cls: "sign-bar",
-        //             handler: function() {}
-        //         }, {
-        //             type: "bi.label",
-        //             text: "或"
-        //         }, {
-        //             type: "bi.text_button",
-        //             text: "注册",
-        //             cls: "sign-bar",
-        //             handler: function() {
-        //                 window.location.href = "https://github.com/login?client_id=0625d398dd9166a196e9&return_to=%2Flogin%2Foauth%2Fauthorize%3Fclient_id%3D0625d398dd9166a196e9%26redirect_uri%3Dhttps%253A%252F%252Fcnodejs.org%252Fauth%252Fgithub%252Fcallback%26response_type%3Dcode";
-        //             }
-        //         }, {
-        //             type: "bi.label",
-        //             text: "也可以"
-        //         }]
-        //     }, {
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         items: [{
-        //             type: "bi.button",
-        //             height: 34,
-        //             text: "通过 GiHub 登录",
-        //             handler: function() {
-        //                 window.location.href = "https://github.com/login/oauth/authorize?response_type=code&redirect_uri=https%3A%2F%2Fcnodejs.org%2Fauth%2Fgithub%2Fcallback&client_id=0625d398dd9166a196e9";
-        //             }
-        //         }]
-        //     }]
-        // }, {
-        //     type: "bi.vertical",
-        //     cls: "side-bar",
-        //     vgap: 10,
-        //     height: 310,
-        //     items: [{
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         items: [{
-        //             type: "bi.image_button",
-        //             src: "https://dn-cnode.qbox.me/FlajCCXkxZaOsuWp3k0iaiqfrJaS",
-        //             width: 270,
-        //         }]
-        //     }, {
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         items: [{
-        //             type: "bi.image_button",
-        //             src: "https://dn-cnode.qbox.me/Fv9R31Y6ySKKJi95ldk9TRkJ7o5O",
-        //             width: 270,
-        //         }]
-        //     }, {
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         items: [{
-        //             type: "bi.image_button",
-        //             src: "https://dn-cnode.qbox.me/Fn4D6BhOTz1IswvmzeZ1q7QW1ls_",
-        //             width: 270,
-        //         }]
-        //     }, {
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         items: [{
-        //             type: "bi.image_button",
-        //             src: "https://render.alipay.com/p/s/taobaonpm_click/image_25",
-        //             width: 270,
-        //         }]
-        //     }]
-        // }, {
-        //     type: "bi.vertical",
-        //     vgap: 10,
-        //     height: 220,
-        //     cls: "side-bar",
-        //     items: [{
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         cls: "title-bar",
-        //         items: [{
-        //             type: "bi.label",
-        //             text: "无人回复的话题"
-        //         }]
-        //     }]
-        // }, {
-        //     type: "bi.vertical",
-        //     vgap: 10,
-        //     height: 220,
-        //     cls: "side-bar",
-        //     items: [{
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         cls: "title-bar",
-        //         items: [{
-        //             type: "bi.label",
-        //             text: "积分榜"
-        //         }, {
-        //             type: "bi.text_button",
-        //             text: "TOP 100 >>"
-        //         }]
-        //     }]
-        // }, {
-        //     type: "bi.vertical",
-        //     vgap: 10,
-        //     height: 283,
-        //     cls: "side-bar",
-        //     items: [{
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         cls: "title-bar",
-        //         items: [{
-        //             type: "bi.label",
-        //             text: "友情社区"
-        //         }]
-        //     }, {
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         items: [{
-        //             type: "bi.image_button",
-        //             src: "https://o4j806krb.qnssl.com/public/images/ruby-china-20150529.png",
-        //             width: 270,
-        //             height: 50
-        //         }]
-        //     }, {
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         items: [{
-        //             type: "bi.image_button",
-        //             src: "https://o4j806krb.qnssl.com/public/images/golangtc-logo.png",
-        //             width: 270,
-        //             height: 50
-        //         }]
-        //     }, {
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         items: [{
-        //             type: "bi.image_button",
-        //             src: "https://o4j806krb.qnssl.com/public/images/phphub-logo.png",
-        //             width: 270,
-        //             height: 50
-        //         }]
-        //     }, {
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         items: [{
-        //             type: "bi.image_button",
-        //             src: "https://dn-cnode.qbox.me/FjLUc7IJ2--DqS706etPQ1EGajxK",
-        //             width: 270,
-        //             height: 50
-        //         }]
-        //     }]
-        // }, {
-        //     type: "bi.vertical",
-        //     vgap: 10,
-        //     height: 286,
-        //     cls: "side-bar",
-        //     items: [{
-        //         type: "bi.horizontal",
-        //         hgap: 5,
-        //         cls: "title-bar",
-        //         items: [{
-        //             type: "bi.label",
-        //             text: "客户端二维码"
-        //         }]
-        //     }, {
-        //         type: "bi.horizontal_adapt",
-        //         items: [{
-        //             type: "bi.image_button",
-        //             src: "https://dn-cnode.qbox.me/FtG0YVgQ6iginiLpf9W4_ShjiLfU",
-        //             width: 200,
-        //             height: 200
-        //         }]
-        //     }, {
-        //         type: "bi.horizontal_adapt",
-        //         items: [{
-        //             type: "bi.text_button",
-        //             width: 100,
-        //             cls: "client-code-link",
-        //             text: "客户端源码地址",
-        //             handler: function() {
-        //                 window.location.href = "https://github.com/soliury/noder-react-native";
-        //             }
-        //         }]
-        //     }]
-        // }],
-
         watch: {
             sidebarInfo: function(val) {
                 console.log("the sidebar is changing...");
@@ -215,26 +12,22 @@
                 if (Dec.platformModel.selectedHash == "getpage") {
                     this.content.populate(this._formatItems(val));
                 }
-                // console.log(this._formatDefault());
             },
             selectedHash: function(val) {
                 // console.log(val);
-                // console.log(default_sidebar);
                 if (val != "getpage") {
-                    if (val == "api") {
-                        console.log("sidebarinfo: api-none!");
-                        this.content.populate([]);
-                        return;
-                    }
+                    // if (val == "api") {
+                    //     console.log("sidebarinfo: api-none!");
+                    //     this.content.populate([]);
+                    //     return;
+                    // }
                     if (val == "signin") {
                         console.log("sidebarinfo: signin!");
                         this.content.populate(this._formatSignin());
                         return;
                     }
                     console.log("sidebarinfo: defult!");
-                    // console.log(default_sidebar);
                     this.content.populate(this._formatDefault());
-                    // this.content.populate(this.default_sidebar);
                 }
             }
         },
@@ -242,42 +35,62 @@
         _formatSignin: function() {
             return [{
                 type: "bi.vertical",
-                height: 246,
-                vgap: 12,
-                lgap: 15,
                 cls: "side-bar",
+                tgap: 10,
                 items: [{
-                    type: "bi.horizontal",
-                    hgap: 5,
+                    type: "bi.vertical",
                     cls: "title-bar",
                     items: [{
-                        type: "bi.label",
-                        text: "关于"
+                        el: {
+                            type: "bi.label",
+                            text: "关于",
+                            textAlign: "left"
+                        },
+                        lgap: 16
                     }]
                 }, {
-                    type: "bi.label",
-                    textAlign: "left",
-                    text: "CNode：Node.js专业中文社区"
+                    el: {
+                        type: "bi.label",
+                        textAlign: "left",
+                        text: "CNode：Node.js专业中文社区"
+                    },
+                    lgap: 16
                 }, {
-                    type: "bi.label",
-                    textAlign: "left",
-                    text: "在这里你可以："
+                    el: {
+                        type: "bi.label",
+                        textAlign: "left",
+                        text: "在这里你可以："
+                    },
+                    lgap: 16
                 }, {
-                    type: "bi.label",
-                    textAlign: "left",
-                    text: "  ·  向别人提出你遇到的问题"
+                    el: {
+                        type: "bi.label",
+                        textAlign: "left",
+                        text: "  ·  向别人提出你遇到的问题"
+                    },
+                    lgap: 16
                 }, {
-                    type: "bi.label",
-                    textAlign: "left",
-                    text: "  ·  帮助遇到问题的人"
+                    el: {
+                        type: "bi.label",
+                        textAlign: "left",
+                        text: "  ·  帮助遇到问题的人"
+                    },
+                    lgap: 16
                 }, {
-                    type: "bi.label",
-                    textAlign: "left",
-                    text: "  ·  分享自己的知识"
+                    el: {
+                        type: "bi.label",
+                        textAlign: "left",
+                        text: "  ·  分享自己的知识"
+                    },
+                    lgap: 16
                 }, {
-                    type: "bi.label",
-                    textAlign: "left",
-                    text: "  ·  和其它人一起进步"
+                    el: {
+                        type: "bi.label",
+                        textAlign: "left",
+                        text: "  ·  和其它人一起进步"
+                    },
+                    lgap: 16,
+                    bgap: 20
                 }]
             }];
         },
@@ -579,6 +392,7 @@
             var self = this;
             return {
                 type: "bi.vertical",
+                width: 290,
                 ref: function() {
                     self.content = this;
                 },

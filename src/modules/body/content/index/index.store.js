@@ -5,8 +5,6 @@
             this.platform = Dec.platformModel;
             // console.log(Dec.platformModel);
             var self = this;
-            // console.log(self.platform);
-            // console.log(self.platform.topicList);
             self.platform.selectedTab = "all";
             $.ajax({
                 url: "https://cnodejs.org/api/v1/topics",
@@ -59,7 +57,6 @@
                     },
                     success: function(res) {
                         self.platform.topicList = res.data;
-                        // window.scrollTo(0, 0);
                     }
                 });
             }

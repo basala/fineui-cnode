@@ -78,7 +78,6 @@
 .linkpage-code {
   font-size: 14px;
   background: #f7f7f7;
-  padding: 5px 10px;
 }
 .topic-bar {
   background-color: #fff;
@@ -100,19 +99,14 @@
 }
 .page-bar {
   background-color: #fff;
-  padding: 5px;
 }
 .special-bar {
-  width: 32px;
-  height: 18px;
   color: #fff;
   background-color: #80bd01;
   font-size: 14px;
   border-radius: 4px;
 }
 .normal-bar {
-  width: 32px;
-  height: 18px;
   color: #999;
   background-color: #e5e5e5;
   font-size: 14px;
@@ -120,39 +114,27 @@
 }
 .page-content {
   background-color: #fff;
-  margin: 10px;
   border-radius: 4px;
 }
 .page-content .special-bar {
-  width: 32px;
-  height: 18px;
   color: #fff;
   background-color: #80bd01;
   font-size: 14px;
   border-radius: 4px;
-  margin-top: 20px;
-  margin-left: 10px;
 }
 .page-content .normal-bar {
-  width: 32px;
-  height: 18px;
   color: #999;
   background-color: #e5e5e5;
   font-size: 14px;
   border-radius: 4px;
-  margin-top: 20px;
-  margin-left: 10px;
 }
 .page-title {
   font-size: 22px;
   font-weight: 999;
-  margin-top: 15px;
 }
 .page-info {
   font-size: 12px;
   color: #838383;
-  margin-top: 5px;
-  padding-bottom: 15px;
 }
 .collect-button {
   background-color: #80bd01!important;
@@ -160,15 +142,11 @@
   line-height: 34px;
   font-size: 14px;
   border-radius: 3px;
-  width: 52px;
-  height: 34px;
 }
 .page-content-body {
-  padding: 20px;
   font-size: 16px;
 }
 .reply-title {
-  padding: 15px;
   font-size: 14px;
   color: #444;
 }
@@ -207,18 +185,13 @@
   border-bottom: 1px solid #3685f2;
   font-size: 16px;
 }
-.tab-container {
-  margin-top: 10px;
-}
 .tab-bar td:last-child div {
   border-right: 1px solid #3685f2;
 }
 .footer-bar {
-  padding-left: 40px;
   font-size: 14px;
   color: #ababab;
   background-color: #fff;
-  margin-bottom: 0!important;
 }
 .link-bar {
   color: #08c;
@@ -230,10 +203,7 @@ div.code-link:hover {
   color: #3923e4;
 }
 .header-panel {
-  height: 50px;
-  margin-top: 0!important;
   background-color: #444;
-  padding-left: 40px;
 }
 .search-bar {
   background: url("https://o4j806krb.qnssl.com/public/images/search.e53b380a.hashed.png") 4px 4px no-repeat #888;

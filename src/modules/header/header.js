@@ -3,43 +3,34 @@
         _store: function() {
             return BI.Models.getModel("dec.model.header");
         },
-        getWidth: function() {
-            return document.body.clientWidth;
-        },
         watch: {
-            // selectedHeader: function(val) {
-            //     this.list.setValue(val);
-            // },
             selectedHash: function(val) {
                 this.hash.setValue(val);
             }
         },
-
         render: function() {
             var self = this;
             return {
                 type: "bi.left_right_vertical_adapt",
                 cls: "header-panel",
-                lhgap: self.getWidth() * 0.0073,
-                rhgap: self.getWidth() * 0.022,
+                lhgap: 10,
+                rhgap: 30,
+                height: 50,
                 items: {
                     left: [{
                         type: "bi.image_button",
                         src: "https://o4j806krb.qnssl.com/public/images/cnodejs_light.svg",
-                        width: self.getWidth() * 0.0876,
+                        width: 120,
                         height: 30,
+                        lgap: 30,
                         handler: function() {
                             self.store.selectHash("index");
                         }
                     }, {
                         type: "bi.clear_editor",
                         cls: "search-bar",
-                        width: self.getWidth() * 0.123,
-                        height: 26,
-                        handler: function() {
-                            // console.log(self);
-                            // self.style.cssText = "background: #fff;";
-                        }
+                        width: 233,
+                        height: 26
                     }],
                     right: [{
                         type: "bi.button_group",
@@ -55,7 +46,7 @@
                         }],
                         layouts: [{
                             type: "bi.vertical_adapt",
-                            hgap: self.getWidth() * 0.01464
+                            hgap: 20
                         }],
                         items: this.model.hashes
                     }]

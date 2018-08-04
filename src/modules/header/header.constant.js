@@ -1,11 +1,4 @@
 !(function() {
-    // BI.constant("dec.constant.header.items", [{
-    //     value: "标签一",
-    //     action: "dec.action.header.action1"
-    // }, {
-    //     value: "标签二",
-    //     action: "dec.action.header.action2"
-    // }]);
     BI.constant("dec.constant.header.hashes", [{
         text: "首页",
         value: "index"

@@ -18,19 +18,14 @@
 }
 .page-bar {
   background-color: #fff;
-  padding: 5px;
 }
 .special-bar {
-  width: 32px;
-  height: 18px;
   color: #fff;
   background-color: #80bd01;
   font-size: 14px;
   border-radius: 4px;
 }
 .normal-bar {
-  width: 32px;
-  height: 18px;
   color: #999;
   background-color: #e5e5e5;
   font-size: 14px;

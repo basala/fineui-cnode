@@ -25,8 +25,7 @@
             var self = this;
             return {
                 type: "bi.vertical",
-                // element: this,
-                // vgap: 10,
+                tgap: 10,
                 cls: "tab-container",
                 items: [{
                     type: "bi.button_group",
@@ -35,7 +34,6 @@
                     },
                     layouts: [{
                         type: "bi.horizontal_adapt",
-                        // htape: 10
                     }],
                     scrollx: true,
                     cls: "tab-bar",
