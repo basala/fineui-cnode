@@ -82,18 +82,15 @@
                     }, {
                         width: "fill",
                         el: {
-                            type: "bi.vertical_adapt",
-                            items: [{
-                                type: "bi.text_button",
-                                width: self.getWidth() * 0.4539,
-                                text: value.title,
-                                title: value.title,
-                                textAlign: "left",
-                                handler: function() {
-                                    self.store.getPage(value);
-                                }
-                            }]
-                        }
+                            type: "bi.text_button",
+                            text: value.title,
+                            title: value.title,
+                            textAlign: "left",
+                            handler: function() {
+                                self.store.getPage(value);
+                            }
+                        },
+                        tgap: 17
                     }, {
                         width: 56,
                         el: {

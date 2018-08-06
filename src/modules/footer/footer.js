@@ -3,7 +3,7 @@
         render: function() {
             return {
                 type: "bi.vertical",
-                height: 190,
+                // height: 190,
                 cls: "footer-bar",
                 items: [{
                     type: "bi.vertical",

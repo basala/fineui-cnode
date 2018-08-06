@@ -15,7 +15,7 @@
                 cls: "header-panel",
                 lhgap: 10,
                 rhgap: 30,
-                height: 50,
+                // height: 50,
                 items: {
                     left: [{
                         type: "bi.image_button",

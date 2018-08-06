@@ -1268,18 +1268,15 @@ if (!window.Dec) {
                     }, {
                         width: "fill",
                         el: {
-                            type: "bi.vertical_adapt",
-                            items: [{
-                                type: "bi.text_button",
-                                width: self.getWidth() * 0.4539,
-                                text: value.title,
-                                title: value.title,
-                                textAlign: "left",
-                                handler: function() {
-                                    self.store.getPage(value);
-                                }
-                            }]
-                        }
+                            type: "bi.text_button",
+                            text: value.title,
+                            title: value.title,
+                            textAlign: "left",
+                            handler: function() {
+                                self.store.getPage(value);
+                            }
+                        },
+                        tgap: 17
                     }, {
                         width: 56,
                         el: {
@@ -2240,7 +2237,7 @@ if (!window.Dec) {
         render: function() {
             return {
                 type: "bi.vertical",
-                height: 190,
+                // height: 190,
                 cls: "footer-bar",
                 items: [{
                     type: "bi.vertical",
@@ -2409,7 +2406,7 @@ if (!window.Dec) {
                 cls: "header-panel",
                 lhgap: 10,
                 rhgap: 30,
-                height: 50,
+                // height: 50,
                 items: {
                     left: [{
                         type: "bi.image_button",
@@ -2489,13 +2486,16 @@ if (!window.Dec) {
                 items: [{
                     type: "dec.header",
                     cls: "bi-border-bottom",
+                    height: 50,
                     bgap: 20
                 }, {
                     type: "dec.body",
-                    bgap: 60
+                    bgap: 60,
+                    // height: 2200,
                 }, {
                     type: "dec.footer",
                     cls: "bi-border-top",
+                    heigh: 190
                 }]
             };
         }
