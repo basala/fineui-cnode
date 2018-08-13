@@ -6,27 +6,16 @@
 
         watch: {
             sidebarInfo: function(val) {
-                console.log("the sidebar is changing...");
-                // console.log(val);
-                // console.log(this._formatDefault());
                 if (Dec.platformModel.selectedHash == "getpage") {
                     this.content.populate(this._formatItems(val));
                 }
             },
             selectedHash: function(val) {
-                // console.log(val);
                 if (val != "getpage") {
-                    // if (val == "api") {
-                    //     console.log("sidebarinfo: api-none!");
-                    //     this.content.populate([]);
-                    //     return;
-                    // }
                     if (val == "signin") {
-                        console.log("sidebarinfo: signin!");
                         this.content.populate(this._formatSignin());
                         return;
                     }
-                    console.log("sidebarinfo: defult!");
                     this.content.populate(this._formatDefault());
                 }
             }
@@ -301,7 +290,6 @@
         },
 
         _formatItems: function(value) {
-            console.log("sidebarinfo: authour!");
             return [{
                 type: "bi.vertical",
                 vgap: 10,
@@ -370,22 +358,33 @@
 
         _formatOtherTopic: function(topics) {
             var self = this;
-            return BI.map(topics, function(index, topic) {
-                return {
-                    type: "bi.text_button",
-                    cls: "text-color",
-                    vgap: 10,
-                    lgap: 10,
-                    rgap: 10,
-                    // cls: "",
-                    text: topic.title,
-                    textAlign: "left",
-                    title: topic.title,
-                    handler: function() {
-                        self.store.getPage(topic.id);
-                    }
-                };
-            });
+            othertopics = topics.slice(1);
+            if (othertopics != 0) {
+                return BI.map(othertopics, function(index, topic) {
+                    return {
+                        type: "bi.text_button",
+                        cls: "text-color",
+                        vgap: 10,
+                        lgap: 10,
+                        rgap: 10,
+                        text: topic.title,
+                        textAlign: "left",
+                        title: topic.title,
+                        handler: function() {
+                            self.store.getPage(topic.id);
+                        }
+                    };
+                });
+            }
+            return [{
+                type: "bi.label",
+                cls: "text-color",
+                tgap: 10,
+                bgap: 10,
+                lgap: 10,
+                text: "无",
+                textAlign: "left",
+            }]
         },
 
         render: function() {
@@ -397,7 +396,6 @@
                     self.content = this;
                 },
                 items: self._formatDefault()
-                // items: this.default_sidebar
             };
         }
     });

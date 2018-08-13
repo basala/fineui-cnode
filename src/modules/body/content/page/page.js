@@ -1,8 +1,10 @@
 !(function() {
     var flag = {
-        "share": "分享",
-        "ask": "问答",
-        "default": "问答"
+        share: "分享",
+        ask: "问答",
+        job: "招聘",
+        dev: "测试",
+        default: "问答"
     };
     var Page = BI.inherit(BI.Widget, {
         _store: function() {
@@ -11,8 +13,6 @@
 
         watch: {
             topicPage: function(val) {
-                // console.log("the topicPage is changing...");
-                // console.log(val);
                 this.test.populate(this._formatContent(val));
                 $(".page-content-body").html(val.content);
             }
@@ -41,6 +41,8 @@
                                 type: "bi.label",
                                 text: value.title,
                                 lgap: 5,
+                                rgap: 10,
+                                whiteSpace: "normal",
                                 cls: "page-title",
                                 whiteSpace: "normal",
                                 textAlign: "left"
@@ -85,7 +87,8 @@
                             cls: "page-content-body",
                             lgap: 20,
                             tgap: 20,
-                            bgap: 20
+                            bgap: 20,
+                            rgap: 20
                         }]
                     }
                 }, {

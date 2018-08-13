@@ -2,7 +2,6 @@
     var Store = BI.inherit(Fix.Model, {
         _init: function() {
             this.platform = Dec.platformModel;
-            // console.log(Dec.platformModel);
             var self = this;
         },
 
@@ -23,7 +22,6 @@
                     url: "https://cnodejs.org/api/v1/topic/" + value,
                     success: function(res) {
                         self.platform.topicPage = res.data;
-                        console.log(Dec.platformModel.topicPage);
                     }
                 });
             }

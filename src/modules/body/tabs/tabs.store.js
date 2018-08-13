@@ -17,9 +17,6 @@
                         selected: model.selectedTab === tab.value
                     };
                 });
-            },
-            selectedTab: function() {
-                return this.platform.selectedTab;
             }
         },
         actions: {

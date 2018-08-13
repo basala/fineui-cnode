@@ -139,7 +139,6 @@
 .collect-button {
   background-color: #80bd01!important;
   border: none!important;
-  line-height: 34px;
   font-size: 14px;
   border-radius: 3px;
 }
@@ -183,7 +182,7 @@
   border-left: 1px solid #3685f2;
   border-top: 1px solid #3685f2;
   border-bottom: 1px solid #3685f2;
-  font-size: 16px;
+  font-size: 14px;
 }
 .tab-bar td:last-child div {
   border-right: 1px solid #3685f2;
@@ -208,9 +207,6 @@ div.code-link:hover {
 .search-bar {
   background-color: #888;
   border-radius: 13px;
-}
-.search-bar:active {
-  background-color: #fff;
 }
 div.search-bar:hover {
   background-color: #fff;

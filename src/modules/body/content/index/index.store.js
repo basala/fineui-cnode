@@ -1,9 +1,7 @@
 !(function() {
     var Store = BI.inherit(Fix.Model, {
         _init: function() {
-            // console.log("index init....");
             this.platform = Dec.platformModel;
-            // console.log(Dec.platformModel);
             var self = this;
             self.platform.selectedTab = "all";
             $.ajax({
@@ -14,7 +12,6 @@
                 },
                 success: function(res) {
                     self.platform.topicList = res.data;
-                    // console.log(self.platform.topicList);
                 }
             });
         },
@@ -42,7 +39,6 @@
                     url: "https://cnodejs.org/api/v1/topic/" + value.id,
                     success: function(res) {
                         self.platform.topicPage = res.data;
-                        // console.log(Dec.platformModel.topicPage);
                     }
                 });
             },

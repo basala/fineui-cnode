@@ -2,6 +2,8 @@
     var flag = {
         share: "分享",
         ask: "问答",
+        job: "招聘",
+        dev: "测试",
         default: "问答"
     };
     var Index = BI.inherit(BI.Widget, {
@@ -11,15 +13,12 @@
 
         watch: {
             topicList: function(val) {
-                // console.log("the topicList is changing...");
-                // console.log(val);
                 this.topiclist.populate(this._formatItems(val));
                 BI.defer(function() {
                     $('#wrapper').scrollTop(0);
                 });
             },
             selectedTab: function() {
-                // console.log("the selectedTab is changing...");
                 this.pagelist.setValue(1);
             }
         },
@@ -88,9 +87,9 @@
                             textAlign: "left",
                             handler: function() {
                                 self.store.getPage(value);
-                            }
-                        },
-                        tgap: 17
+                            },
+                            height: 50
+                        }
                     }, {
                         width: 56,
                         el: {

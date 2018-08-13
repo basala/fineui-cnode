@@ -23,7 +23,7 @@
                         height: 30,
                         lgap: 30,
                         handler: function() {
-                            self.store.selectHash("index");
+                            self.store.setHash("index");
                         }
                     }, {
                         type: "bi.search_editor",
@@ -40,8 +40,7 @@
                         listeners: [{
                             eventName: BI.ButtonGroup.EVENT_CHANGE,
                             action: function() {
-                                console.log(this.getValue());
-                                self.store.hash(this.getValue()[0]);
+                                self.store.setHash(this.getValue()[0]);
                             }
                         }],
                         layouts: [{

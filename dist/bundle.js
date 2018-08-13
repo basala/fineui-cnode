@@ -39,45 +39,34 @@
             selectedHash: function(hash) {
                 switch (hash) {
                     case "index":
-                        // console.log("index");
                         this.content.populate([{
                             type: "dec.body.content.index"
                         }]);
                         break;
                     case "getstart":
-                        // console.log("getstart");
                         this.content.populate([{
                             type: "dec.body.content.getstart"
                         }]);
                         break;
                     case "api":
-                        // console.log("api");
                         this.content.populate([{
                             type: "dec.body.content.api"
                         }]);
                         break;
                     case "about":
-                        // console.log("about");
                         this.content.populate([{
                             type: "dec.body.content.about"
                         }]);
                         break;
                     case "signup":
-                        // console.log("signup");
-                        // this.content.populate([{
-                        //     type: "dec.body.content.signup"
-                        // }]);
                         window.location.href = "https://github.com/login/oauth/authorize?response_type=code&redirect_uri=https%3A%2F%2Fcnodejs.org%2Fauth%2Fgithub%2Fcallback&client_id=0625d398dd9166a196e9";
                         break;
                     case "signin":
-                        // console.log("signin");
                         this.content.populate([{
                             type: "dec.body.content.signin"
                         }]);
                         break;
                     case "getpage":
-                        // console.log("getpage");
-                        // console.log(Dec.platformModel.topicPage);
                         this.content.populate([{
                             type: "dec.body.content.page"
                         }]);
@@ -93,7 +82,6 @@
                 lgap: 60,
                 rgap: 60,
                 items: [{
-                    // type: "bi.horizontal",
                     type: "bi.htape",
                     height: 2200,
                     ref: function() {
@@ -1216,6 +1204,8 @@
     var flag = {
         share: "分享",
         ask: "问答",
+        job: "招聘",
+        dev: "测试",
         default: "问答"
     };
     var Index = BI.inherit(BI.Widget, {
@@ -1225,15 +1215,12 @@
 
         watch: {
             topicList: function(val) {
-                // console.log("the topicList is changing...");
-                // console.log(val);
                 this.topiclist.populate(this._formatItems(val));
                 BI.defer(function() {
                     $('#wrapper').scrollTop(0);
                 });
             },
             selectedTab: function() {
-                // console.log("the selectedTab is changing...");
                 this.pagelist.setValue(1);
             }
         },
@@ -1302,9 +1289,9 @@
                             textAlign: "left",
                             handler: function() {
                                 self.store.getPage(value);
-                            }
-                        },
-                        tgap: 17
+                            },
+                            height: 50
+                        }
                     }, {
                         width: 56,
                         el: {
@@ -1367,9 +1354,7 @@
 })();!(function() {
     var Store = BI.inherit(Fix.Model, {
         _init: function() {
-            // console.log("index init....");
             this.platform = Dec.platformModel;
-            // console.log(Dec.platformModel);
             var self = this;
             self.platform.selectedTab = "all";
             $.ajax({
@@ -1380,7 +1365,6 @@
                 },
                 success: function(res) {
                     self.platform.topicList = res.data;
-                    // console.log(self.platform.topicList);
                 }
             });
         },
@@ -1408,7 +1392,6 @@
                     url: "https://cnodejs.org/api/v1/topic/" + value.id,
                     success: function(res) {
                         self.platform.topicPage = res.data;
-                        // console.log(Dec.platformModel.topicPage);
                     }
                 });
             },
@@ -1431,9 +1414,11 @@
     BI.model("dec.model.body.content.index", Store);
 })();!(function() {
     var flag = {
-        "share": "分享",
-        "ask": "问答",
-        "default": "问答"
+        share: "分享",
+        ask: "问答",
+        job: "招聘",
+        dev: "测试",
+        default: "问答"
     };
     var Page = BI.inherit(BI.Widget, {
         _store: function() {
@@ -1442,8 +1427,6 @@
 
         watch: {
             topicPage: function(val) {
-                // console.log("the topicPage is changing...");
-                // console.log(val);
                 this.test.populate(this._formatContent(val));
                 $(".page-content-body").html(val.content);
             }
@@ -1472,6 +1455,8 @@
                                 type: "bi.label",
                                 text: value.title,
                                 lgap: 5,
+                                rgap: 10,
+                                whiteSpace: "normal",
                                 cls: "page-title",
                                 whiteSpace: "normal",
                                 textAlign: "left"
@@ -1516,7 +1501,8 @@
                             cls: "page-content-body",
                             lgap: 20,
                             tgap: 20,
-                            bgap: 20
+                            bgap: 20,
+                            rgap: 20
                         }]
                     }
                 }, {
@@ -1745,27 +1731,16 @@
 
         watch: {
             sidebarInfo: function(val) {
-                console.log("the sidebar is changing...");
-                // console.log(val);
-                // console.log(this._formatDefault());
                 if (Dec.platformModel.selectedHash == "getpage") {
                     this.content.populate(this._formatItems(val));
                 }
             },
             selectedHash: function(val) {
-                // console.log(val);
                 if (val != "getpage") {
-                    // if (val == "api") {
-                    //     console.log("sidebarinfo: api-none!");
-                    //     this.content.populate([]);
-                    //     return;
-                    // }
                     if (val == "signin") {
-                        console.log("sidebarinfo: signin!");
                         this.content.populate(this._formatSignin());
                         return;
                     }
-                    console.log("sidebarinfo: defult!");
                     this.content.populate(this._formatDefault());
                 }
             }
@@ -2040,7 +2015,6 @@
         },
 
         _formatItems: function(value) {
-            console.log("sidebarinfo: authour!");
             return [{
                 type: "bi.vertical",
                 vgap: 10,
@@ -2109,22 +2083,33 @@
 
         _formatOtherTopic: function(topics) {
             var self = this;
-            return BI.map(topics, function(index, topic) {
-                return {
-                    type: "bi.text_button",
-                    cls: "text-color",
-                    vgap: 10,
-                    lgap: 10,
-                    rgap: 10,
-                    // cls: "",
-                    text: topic.title,
-                    textAlign: "left",
-                    title: topic.title,
-                    handler: function() {
-                        self.store.getPage(topic.id);
-                    }
-                };
-            });
+            othertopics = topics.slice(1);
+            if (othertopics != 0) {
+                return BI.map(othertopics, function(index, topic) {
+                    return {
+                        type: "bi.text_button",
+                        cls: "text-color",
+                        vgap: 10,
+                        lgap: 10,
+                        rgap: 10,
+                        text: topic.title,
+                        textAlign: "left",
+                        title: topic.title,
+                        handler: function() {
+                            self.store.getPage(topic.id);
+                        }
+                    };
+                });
+            }
+            return [{
+                type: "bi.label",
+                cls: "text-color",
+                tgap: 10,
+                bgap: 10,
+                lgap: 10,
+                text: "无",
+                textAlign: "left",
+            }]
         },
 
         render: function() {
@@ -2136,7 +2121,6 @@
                     self.content = this;
                 },
                 items: self._formatDefault()
-                // items: this.default_sidebar
             };
         }
     });
@@ -2145,7 +2129,6 @@
     var Store = BI.inherit(Fix.Model, {
         _init: function() {
             this.platform = Dec.platformModel;
-            // console.log(Dec.platformModel);
             var self = this;
         },
 
@@ -2166,7 +2149,6 @@
                     url: "https://cnodejs.org/api/v1/topic/" + value,
                     success: function(res) {
                         self.platform.topicPage = res.data;
-                        console.log(Dec.platformModel.topicPage);
                     }
                 });
             }
@@ -2237,9 +2219,6 @@
                         selected: model.selectedTab === tab.value
                     };
                 });
-            },
-            selectedTab: function() {
-                return this.platform.selectedTab;
             }
         },
         actions: {
@@ -2265,100 +2244,109 @@
         render: function() {
             return {
                 type: "bi.vertical",
-                // height: 190,
                 cls: "footer-bar",
                 items: [{
-                    type: "bi.vertical",
-                    lgap: 25,
-                    items: [{
-                        type: "bi.horizontal",
-                        hgap: 10,
-                        tgap: 20,
+                    el: {
+                        type: "bi.vertical",
                         items: [{
-                            type: "bi.text_button",
-                            text: "RSS",
-                            cls: "code-link",
-                            handler: function() {
-                                window.location.href = "https://cnodejs.org/rss";
-                            }
+                            el: {
+                                type: "bi.horizontal",
+                                items: [{
+                                    type: "bi.text_button",
+                                    text: "RSS",
+                                    cls: "code-link",
+                                    handler: function() {
+                                        window.location.href = "https://cnodejs.org/rss";
+                                    }
+                                }, {
+                                    type: "bi.label",
+                                    text: "|"
+                                }, {
+                                    type: "bi.text_button",
+                                    text: "源码地址",
+                                    cls: "code-link",
+                                    handler: function() {
+                                        window.location.href = "https://cnodejs.org/rss";
+                                    }
+                                }]
+                            },
+                            hgap: 10,
+                            tgap: 20,
+                            bgap: 10
                         }, {
-                            type: "bi.label",
-                            text: "|"
+                            el: {
+                                type: "bi.horizontal",
+                                items: [{
+                                    type: "bi.label",
+                                    text: "CNode 社区为国内最专业的 Node.js 开源技术社区，致力于 Node.js 的技术研究。"
+                                }]
+                            },
+                            hgap: 10
                         }, {
-                            type: "bi.text_button",
-                            text: "源码地址",
-                            cls: "code-link",
-                            handler: function() {
-                                window.location.href = "https://cnodejs.org/rss";
-                            }
-                        }]
-                    }, {
-                        type: "bi.horizontal",
-                        hgap: 10,
-                        // tgap: 20,
-                        items: [{
-                            type: "bi.label",
-                            text: "CNode 社区为国内最专业的 Node.js 开源技术社区，致力于 Node.js 的技术研究。"
-                        }]
-                    }, {
-                        type: "bi.horizontal",
-                        hgap: 10,
-                        // tgap: 20,
-                        items: [{
-                            type: "bi.vertical_adapt",
-                            items: [{
-                                type: "bi.label",
-                                text: "服务器赞助商为"
-                            }, {
-                                type: "bi.image_button",
-                                src: "https://dn-cnode.qbox.me/FuIpEaM9bvsZKnQ3QfPtBHWQmLM9",
-                                width: 92,
-                                height: 18,
-                                handler: function() {
-                                    window.location.href = "https://www.ucloud.cn/?utm_source=zanzhu&utm_campaign=cnodejs&utm_medium=display&utm_content=yejiao&ytag=cnodejs_logo";
-                                }
-                            }, {
-                                type: "bi.label",
-                                text: "，存储赞助商为"
-                            }, {
-                                type: "bi.image_button",
-                                src: "https://dn-cnode.qbox.me/Fg0jtDIcTqVC049oVu5-sn6Om4NX",
-                                width: 115,
-                                height: 44,
-                                handler: function() {
-                                    window.location.href = "http://www.qiniu.com/?ref=cnode";
-                                }
-                            }, {
-                                type: "bi.label",
-                                text: "，由"
-                            }, {
-                                type: "bi.image_button",
-                                src: "https://dn-cnode.qbox.me/FpMZk31PDyxkC8yStmMQL4XroaGD",
-                                width: 166,
-                                height: 54,
-                                handler: function() {
-                                    window.location.href = "https://www.aliyun.com/product/nodejs?ref=cnode";
-                                }
-                            }, {
-                                type: "bi.label",
-                                text: "提供应用性能服务。"
-                            }]
-                        }]
-                    }, {
-                        type: "bi.horizontal",
-                        hgap: 10,
-                        items: [{
-                            type: "bi.label",
-                            text: "新手搭建 Node.js 服务器，推荐使用无需备案的"
+                            el: {
+                                type: "bi.horizontal",
+                                items: [{
+                                    type: "bi.vertical_adapt",
+                                    items: [{
+                                        type: "bi.label",
+                                        text: "服务器赞助商为"
+                                    }, {
+                                        type: "bi.image_button",
+                                        src: "https://dn-cnode.qbox.me/FuIpEaM9bvsZKnQ3QfPtBHWQmLM9",
+                                        width: 92,
+                                        height: 18,
+                                        handler: function() {
+                                            window.location.href = "https://www.ucloud.cn/?utm_source=zanzhu&utm_campaign=cnodejs&utm_medium=display&utm_content=yejiao&ytag=cnodejs_logo";
+                                        }
+                                    }, {
+                                        type: "bi.label",
+                                        text: "，存储赞助商为"
+                                    }, {
+                                        type: "bi.image_button",
+                                        src: "https://dn-cnode.qbox.me/Fg0jtDIcTqVC049oVu5-sn6Om4NX",
+                                        width: 115,
+                                        height: 44,
+                                        handler: function() {
+                                            window.location.href = "http://www.qiniu.com/?ref=cnode";
+                                        }
+                                    }, {
+                                        type: "bi.label",
+                                        text: "，由"
+                                    }, {
+                                        type: "bi.image_button",
+                                        src: "https://dn-cnode.qbox.me/FpMZk31PDyxkC8yStmMQL4XroaGD",
+                                        width: 166,
+                                        height: 54,
+                                        handler: function() {
+                                            window.location.href = "https://www.aliyun.com/product/nodejs?ref=cnode";
+                                        }
+                                    }, {
+                                        type: "bi.label",
+                                        text: "提供应用性能服务。"
+                                    }]
+                                }]
+                            },
+                            hgap: 10
                         }, {
-                            type: "bi.text_button",
-                            cls: "link-bar",
-                            text: "DigitalOcean(https://www.digitalocean.com/)",
-                            handler: function() {
-                                window.location.href = "https://www.digitalocean.com/?refcode=eba02656eeb3";
-                            }
+                            el: {
+                                type: "bi.horizontal",
+                                items: [{
+                                    type: "bi.label",
+                                    text: "新手搭建 Node.js 服务器，推荐使用无需备案的"
+                                }, {
+                                    type: "bi.text_button",
+                                    cls: "link-bar",
+                                    text: "DigitalOcean(https://www.digitalocean.com/)",
+                                    handler: function() {
+                                        window.location.href = "https://www.digitalocean.com/?refcode=eba02656eeb3";
+                                    }
+                                }]
+                            },
+                            hgap: 10,
+                            bgap: 20
                         }]
-                    }]
+                    },
+                    lgap: 25
                 }]
             };
         }
@@ -2442,7 +2430,7 @@
                         height: 30,
                         lgap: 30,
                         handler: function() {
-                            self.store.selectHash("index");
+                            self.store.setHash("index");
                         }
                     }, {
                         type: "bi.search_editor",
@@ -2459,8 +2447,7 @@
                         listeners: [{
                             eventName: BI.ButtonGroup.EVENT_CHANGE,
                             action: function() {
-                                console.log(this.getValue());
-                                self.store.hash(this.getValue()[0]);
+                                self.store.setHash(this.getValue()[0]);
                             }
                         }],
                         layouts: [{
@@ -2475,7 +2462,6 @@
     });
     BI.shortcut("dec.header", Header);
 })();(function() {
-    var index = 0;
     var Store = BI.inherit(Fix.Model, {
         _init: function() {
             this.platform = Dec.platformModel;
@@ -2486,21 +2472,15 @@
             },
             hashes: function() {
                 var self = this;
-                return BI.map(
-                    BI.Constants.getConstant("dec.constant.header.hashes"),
-                    function(i, item) {
-                        return BI.extend({
-                                type: "bi.text_button",
-                                selected: item.value === self.platform.selectedHash
-                            },
-                            item
-                        );
-                    }
-                );
+                return BI.map(BI.Constants.getConstant("dec.constant.header.hashes"), function(i, item) {
+                    return BI.extend({
+                        type: "bi.text_button",
+                    }, item);
+                });
             }
         },
         actions: {
-            hash: function(hash) {
+            setHash: function(hash) {
                 this.platform.selectedHash = hash;
             }
         }
