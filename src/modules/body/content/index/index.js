@@ -82,6 +82,7 @@
                         width: "fill",
                         el: {
                             type: "bi.text_button",
+                            cls: "detail-list",
                             text: value.title,
                             title: value.title,
                             textAlign: "left",
@@ -118,7 +119,7 @@
                     ref: function() {
                         self.topiclist = this;
                     },
-                    items: [{}],
+                    items: [],
                     cls: "bi-border-bottom topic-bar"
                 }, {
                     type: "bi.vertical",
