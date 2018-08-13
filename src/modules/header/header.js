@@ -15,7 +15,6 @@
                 cls: "header-panel",
                 lhgap: 10,
                 rhgap: 30,
-                // height: 50,
                 items: {
                     left: [{
                         type: "bi.image_button",
@@ -27,7 +26,7 @@
                             self.store.selectHash("index");
                         }
                     }, {
-                        type: "bi.clear_editor",
+                        type: "bi.search_editor",
                         cls: "search-bar",
                         width: 233,
                         height: 26
@@ -41,6 +40,7 @@
                         listeners: [{
                             eventName: BI.ButtonGroup.EVENT_CHANGE,
                             action: function() {
+                                console.log(this.getValue());
                                 self.store.hash(this.getValue()[0]);
                             }
                         }],

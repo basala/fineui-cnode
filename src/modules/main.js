@@ -11,7 +11,6 @@
                 }, {
                     type: "dec.body",
                     bgap: 60,
-                    // height: 2200,
                 }, {
                     type: "dec.footer",
                     cls: "bi-border-top",

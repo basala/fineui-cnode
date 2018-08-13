@@ -8,10 +8,8 @@ module.exports = function(grunt) {
             },
             bundleJs: {
                 src: [
-                    "src/entry.js",
-                    "src/modules/**/*.js",
                     "src/config.js",
-                    // "src/injections.js",
+                    "src/modules/**/*.js",
                     "src/start.js"
                 ],
                 dest: "dist/bundle.js"

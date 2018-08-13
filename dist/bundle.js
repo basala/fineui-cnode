@@ -1,7 +1,35 @@
-if (!window.Dec) {
-    window.Dec = {};
-    // Dec.injection = {};
-}!(function() {
+!(function() {
+    if (!window.Dec) {
+        window.Dec = {};
+    }
+
+    Dec.platformModel = Fix.define({
+        selectedHash: "index",
+        selectedTab: "all",
+        topicList: [],
+        topicPage: {},
+        sidebarInfo: {},
+        openedTabs: [{
+            text: "全部",
+            value: "all"
+        }, {
+            text: "精华",
+            value: "good"
+        }, {
+            text: "分享",
+            value: "share"
+        }, {
+            text: "问答",
+            value: "ask"
+        }, {
+            text: "招聘",
+            value: "job"
+        }, {
+            text: "客户端测试",
+            value: "dev"
+        }]
+    });
+})();!(function() {
     var Body = BI.inherit(BI.Widget, {
         _store: function() {
             return BI.Models.getModel("dec.model.body");
@@ -2406,7 +2434,6 @@ if (!window.Dec) {
                 cls: "header-panel",
                 lhgap: 10,
                 rhgap: 30,
-                // height: 50,
                 items: {
                     left: [{
                         type: "bi.image_button",
@@ -2418,7 +2445,7 @@ if (!window.Dec) {
                             self.store.selectHash("index");
                         }
                     }, {
-                        type: "bi.clear_editor",
+                        type: "bi.search_editor",
                         cls: "search-bar",
                         width: 233,
                         height: 26
@@ -2432,6 +2459,7 @@ if (!window.Dec) {
                         listeners: [{
                             eventName: BI.ButtonGroup.EVENT_CHANGE,
                             action: function() {
+                                console.log(this.getValue());
                                 self.store.hash(this.getValue()[0]);
                             }
                         }],
@@ -2491,7 +2519,6 @@ if (!window.Dec) {
                 }, {
                     type: "dec.body",
                     bgap: 60,
-                    // height: 2200,
                 }, {
                     type: "dec.footer",
                     cls: "bi-border-top",
@@ -2502,136 +2529,12 @@ if (!window.Dec) {
     });
     BI.shortcut("dec.app", Widget);
 })();!(function() {
-    Dec.platformModel = Fix.define({
-        selectedHash: "index",
-        // selectedHeader: "标签一",
-        selectedTab: "all",
-        topicList: [],
-        topicPage: {},
-        sidebarInfo: {},
-        openedTabs: [{
-            text: "全部",
-            value: "all"
-        }, {
-            text: "精华",
-            value: "good"
-        }, {
-            text: "分享",
-            value: "share"
-        }, {
-            text: "问答",
-            value: "ask"
-        }, {
-            text: "招聘",
-            value: "job"
-        }, {
-            text: "客户端测试",
-            value: "dev"
-        }]
-    });
-
-    // BI.config("dec.constant.nav.items", function (items) {
-    //     return items.concat([
-    //         {
-    //             id: 2,
-    //             value: "第一级菜单",
-    //             open: true
-    //         },
-    //         {
-    //             id: 21,
-    //             pId: 2,
-    //             value: "一级列表项1"
-    //         },
-    //         {
-    //             id: 22,
-    //             pId: 2,
-    //             value: "一级列表项2"
-    //         },
-    //         {
-    //             id: 3,
-    //             value: "第二级菜单",
-    //             open: true
-    //         },
-    //         {
-    //             id: 31,
-    //             pId: 3,
-    //             value: "二级列表项1"
-    //         }
-    //     ]);
-    // });
-
-    // BI.config("dec.constant.header.items", function (items) {
-    //     return items.concat([
-    //         {
-    //             value: "自定义标签",
-    //             action: "dec.action.header.custom"
-    //         }
-    //     ]);
-    // });
-
-    // //定义方法
-    // BI.action("dec.action.header.custom", function (ob) {
-    //     Dec.platformModel.selectedHeader = ob.value;
-    // });
-
-    // //埋点
-    // BI.point("dec.model.header", "testPoint", function () {
-    //     console.log("切面方法");
-    // });
-})();!(function() {
     var AppRouter = BI.inherit(BI.Router, {
         routes: {
-            "": "index",
-            index: "index",
-            getstart: "getstart",
-            api: "api",
-            about: "about",
-            signup: "signup",
-            signin: "signin"
+            "": "index"
         },
         index: function() {
             Dec.platformModel.selectedHash = "index";
-            // Dec.platformModel.selectedHeader = "标签一";
-            BI.createWidget({
-                type: "dec.app",
-                element: "#wrapper"
-            });
-        },
-        getstart: function() {
-            Dec.platformModel.selectedHash = "getstart";
-            // Dec.platformModel.selectedHeader = "标签二";
-            BI.createWidget({
-                type: "dec.app",
-                element: "#wrapper"
-            });
-        },
-        api: function() {
-            Dec.platformModel.selectedHash = "api";
-            // Dec.platformModel.selectedHeader = "标签一";
-            BI.createWidget({
-                type: "dec.app",
-                element: "#wrapper"
-            });
-        },
-        about: function() {
-            Dec.platformModel.selectedHash = "about";
-            // Dec.platformModel.selectedHeader = "标签一";
-            BI.createWidget({
-                type: "dec.app",
-                element: "#wrapper"
-            });
-        },
-        signup: function() {
-            Dec.platformModel.selectedHash = "signup";
-            // Dec.platformModel.selectedHeader = "标签一";
-            BI.createWidget({
-                type: "dec.app",
-                element: "#wrapper"
-            });
-        },
-        signin: function() {
-            Dec.platformModel.selectedHash = "signin";
-            // Dec.platformModel.selectedHeader = "标签一";
             BI.createWidget({
                 type: "dec.app",
                 element: "#wrapper"
@@ -2641,3 +2544,14 @@ if (!window.Dec) {
     new AppRouter();
     BI.history.start();
 })();
+
+$(function() {
+    $(".search-bar input").focus(function() {
+        console.log("focus");
+        $(".search-bar").css("background-color", "#fff");
+    });
+    $(".search-bar input").blur(function() {
+        console.log("blur");
+        $(".search-bar").css("background-color", "#888");
+    });
+});
