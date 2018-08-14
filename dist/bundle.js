@@ -1401,7 +1401,8 @@
             }
         },
 
-        _formatContent: function(value) {
+        _formatContent: function(val) {
+            var title = val.title;
             var self = this;
             return [{
                 type: "bi.vertical",
@@ -1411,23 +1412,40 @@
                         type: "bi.vertical",
                         cls: "page-content",
                         items: [{
-                            type: "bi.vertical_adapt",
+                            el: {
+                                type: "bi.horizontal_adapt",
+                                columnSize: [40, "fill"],
+                                height: 60,
+                                items: [{
+                                    el: {
+                                        type: "bi.vertical_adapt",
+                                        height: 60,
+                                        width: 40,
+                                        items: [{
+                                            type: "bi.label",
+                                            width: 32,
+                                            height: 18,
+                                            text: val.top ? '置顶' : (val.good ? '精华' : (val.tab ? flag[val.tab] : flag["default"])),
+                                            cls: (val.top || val.good) ? 'special-bar' : 'normal-bar'
+                                        }]
+                                    },
+                                    lgap: 10
+                                }, {
+                                    el: {
+                                        type: "bi.label",
+                                        text: val.title,
+                                        lgap: 5,
+                                        rgap: 10,
+                                        height: 60,
+                                        whiteSpace: "normal",
+                                        cls: "page-title",
+                                        textAlign: "left"
+                                    },
+                                    lgap: 5,
+                                    rgap: 10
+                                }]
+                            },
                             lgap: 10,
-                            tgap: 10,
-                            items: [{
-                                type: "bi.label",
-                                width: 32,
-                                height: 18,
-                                text: value.top ? '置顶' : (value.good ? '精华' : (value.tab ? flag[value.tab] : flag["default"])),
-                                cls: (value.top || value.good) ? 'special-bar' : 'normal-bar'
-                            }, {
-                                type: "bi.label",
-                                text: value.title,
-                                lgap: 5,
-                                rgap: 10,
-                                cls: "page-title",
-                                textAlign: "left"
-                            }]
                         }, {
                             el: {
                                 type: "bi.center_adapt",
@@ -1438,19 +1456,19 @@
                                     items: [{
                                         type: "bi.label",
                                         lgap: 5,
-                                        text: "·发布于" + formatReplyTime(value.create_at)
+                                        text: "·发布于" + formatReplyTime(val.create_at)
                                     }, {
                                         type: "bi.label",
                                         lgap: 5,
-                                        text: "·作者" + value.author.loginname
+                                        text: "·作者" + val.author.loginname
                                     }, {
                                         type: "bi.label",
                                         lgap: 5,
-                                        text: "·" + value.visit_count + "次浏览"
+                                        text: "·" + val.visit_count + "次浏览"
                                     }, {
                                         type: "bi.label",
                                         lgap: 5,
-                                        text: "·来自 " + flag[value.tab]
+                                        text: "·来自 " + flag[val.tab]
                                     }]
                                 }, {
                                     type: "bi.right",
@@ -1487,7 +1505,7 @@
                             items: [{
                                 el: {
                                     type: "bi.label",
-                                    text: value.reply_count + "条回复",
+                                    text: val.reply_count + "条回复",
                                     textAlign: "left"
                                 },
                                 tgap: 15,
@@ -1496,7 +1514,7 @@
                             }]
                         }, {
                             type: "bi.list_view",
-                            items: self._formatReplyList(value.replies)
+                            items: self._formatReplyList(val.replies)
                         }]
                     }
                 }]
