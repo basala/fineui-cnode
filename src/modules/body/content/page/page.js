@@ -28,23 +28,38 @@
                         type: "bi.vertical",
                         cls: "page-content",
                         items: [{
-                            type: "bi.vertical_adapt",
+                            el: {
+                                type: "bi.htape",
+                                height: 60,
+                                items: [{
+                                    width: 40,
+                                    el: {
+                                        type: "bi.vertical_adapt",
+                                        items: [{
+                                            type: "bi.label",
+                                            text: value.top ? "置顶" : (value.good ? "精华" : (value.tab ? flag[value.tab] : flag["default"])),
+                                            cls: (value.top || value.good) ? "special-bar" : "normal-bar",
+                                            height: 18,
+                                            width: 32
+                                        }]
+                                    },
+                                    lgap: 10
+                                }, {
+                                    width: "fill",
+                                    el: {
+                                        type: "bi.label",
+                                        text: value.title,
+                                        height: 60,
+                                        whiteSpace: "normal",
+                                        cls: "page-title",
+                                        textAlign: "left"
+                                    },
+                                    lgap: 5,
+                                    rgap: 10
+                                }]
+                            },
                             lgap: 10,
-                            tgap: 10,
-                            items: [{
-                                type: "bi.label",
-                                width: 32,
-                                height: 18,
-                                text: value.top ? '置顶' : (value.good ? '精华' : (value.tab ? flag[value.tab] : flag["default"])),
-                                cls: (value.top || value.good) ? 'special-bar' : 'normal-bar'
-                            }, {
-                                type: "bi.label",
-                                text: value.title,
-                                lgap: 5,
-                                rgap: 10,
-                                cls: "page-title",
-                                textAlign: "left"
-                            }]
+                            tgap: 20
                         }, {
                             el: {
                                 type: "bi.center_adapt",
