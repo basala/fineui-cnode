@@ -462,35 +462,7 @@
                             cls: "linkpage-text"
                         }, {
                             type: "bi.label",
-                            text: `
-{
-  data: {
-    has_read_messages: [],
-    hasnot_read_messages: [
-      {
-        id: "543fb7abae523bbc80412b26",
-        type: "at",
-        has_read: false,
-        author: {
-          loginname: "alsotang",
-          avatar_url: "https://avatars.githubusercontent.com/u/1147375?v=2"
-        },
-        topic: {
-          id: "542d6ecb9ecb3db94b2b3d0f",
-          title: "adfadfadfasdf",
-          last_reply_at: "2014-10-18T07:47:22.563Z"
-        },
-        reply: {
-          id: "543fb7abae523bbc80412b24",
-          content: "[@alsotang](/user/alsotang) 哈哈",
-          ups: [ ],
-          create_at: "2014-10-16T12:18:51.566Z"
-          }
-        },
-    ...
-    ]
-  }
-}`,
+                            text: '{\ndata: {\nhas_read_messages: [],\nhasnot_read_messages: [\n{\nid: "543fb7abae523bbc80412b26",\ntype: "at",\nhas_read: false,\nauthor: {\nloginname: "alsotang",\navatar_url: "https://avatars.githubusercontent.com/u/1147375?v=2"\n},\ntopic: {\nid: "542d6ecb9ecb3db94b2b3d0f",\ntitle: "adfadfadfasdf",\nlast_reply_at: "2014-10-18T07:47:22.563Z"\n},\nreply: {\nid: "543fb7abae523bbc80412b24",\ncontent: "[@alsotang](/user/alsotang) 哈哈",\nups: [ ],\ncreate_at: "2014-10-16T12:18:51.566Z"\n}\n},\n...\n]\n}\n}',
                             textAlign: "left",
                             cls: "linkpage-code"
                         }, {
@@ -517,8 +489,7 @@
                             cls: "linkpage-text"
                         }, {
                             type: "bi.label",
-                            text: `{ success: true,
-                                marked_msgs: [ { id: '544ce385aeaeb5931556c6f9' } ] }`,
+                            text: "{ success: true, marked_msgs: [ { id: '544ce385aeaeb5931556c6f9' } ] }",
                             textAlign: "left",
                             cls: "linkpage-code"
                         }, {
@@ -550,10 +521,7 @@
                             cls: "linkpage-text"
                         }, {
                             type: "bi.label",
-                            text: `{
-  success: true,
-  marked_msg_id: "58ec7d39da8344a81eee0c14"
-}`,
+                            text: '{\nsuccess: true,\nmarked_msg_id:\n"58ec7d39da8344a81eee0c14"\n}',
                             textAlign: "left",
                             cls: "linkpage-code"
                         }, {

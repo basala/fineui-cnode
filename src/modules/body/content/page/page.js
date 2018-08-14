@@ -42,46 +42,48 @@
                                 text: value.title,
                                 lgap: 5,
                                 rgap: 10,
-                                whiteSpace: "normal",
                                 cls: "page-title",
-                                whiteSpace: "normal",
                                 textAlign: "left"
                             }]
                         }, {
-                            type: "bi.center_adapt",
-                            cls: "page-info bi-border-bottom",
+                            el: {
+                                type: "bi.center_adapt",
+                                cls: "page-info bi-border-bottom",
+                                bgap: 5,
+                                items: [{
+                                    type: "bi.left",
+                                    items: [{
+                                        type: "bi.label",
+                                        lgap: 5,
+                                        text: "·发布于" + formatReplyTime(value.create_at)
+                                    }, {
+                                        type: "bi.label",
+                                        lgap: 5,
+                                        text: "·作者" + value.author.loginname
+                                    }, {
+                                        type: "bi.label",
+                                        lgap: 5,
+                                        text: "·" + value.visit_count + "次浏览"
+                                    }, {
+                                        type: "bi.label",
+                                        lgap: 5,
+                                        text: "·来自 " + flag[value.tab]
+                                    }]
+                                }, {
+                                    type: "bi.right",
+                                    items: [{
+                                        type: "bi.button",
+                                        cls: "collect-button",
+                                        rgap: 10,
+                                        text: "收藏",
+                                        width: 52,
+                                        height: 34
+                                    }]
+                                }]
+                            },
+                            tgap: 20,
                             lgap: 10,
-                            bgap: 10,
-                            items: [{
-                                type: "bi.left",
-                                items: [{
-                                    type: "bi.label",
-                                    lgap: 5,
-                                    text: "·发布于" + formatReplyTime(value.create_at)
-                                }, {
-                                    type: "bi.label",
-                                    lgap: 5,
-                                    text: "·作者" + value.author.loginname
-                                }, {
-                                    type: "bi.label",
-                                    lgap: 5,
-                                    text: "·" + value.visit_count + "次浏览"
-                                }, {
-                                    type: "bi.label",
-                                    lgap: 5,
-                                    text: "·来自 " + flag[value.tab]
-                                }]
-                            }, {
-                                type: "bi.right",
-                                items: [{
-                                    type: "bi.button",
-                                    cls: "collect-button",
-                                    rgap: 10,
-                                    text: "收藏",
-                                    width: 52,
-                                    height: 34
-                                }]
-                            }]
+                            rgap: 10
                         }, {
                             type: "bi.center_adapt",
                             cls: "page-content-body",

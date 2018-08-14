@@ -1,9 +1,7 @@
 !(function() {
     var Store = BI.inherit(Fix.Model, {
         _init: function() {
-            // console.log("topicPage init....");
             this.platform = Dec.platformModel;
-            // console.log(Dec.platformModel.topicPage);
             var self = this;
         },
 

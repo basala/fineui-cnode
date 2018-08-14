@@ -98,7 +98,6 @@
                                 type: "bi.text_button",
                                 text: "忘记密码了?",
                                 cls: "forget-text",
-                                // width: 80,
                                 height: 18,
                                 lgap: 10
                             }]

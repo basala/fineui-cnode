@@ -384,7 +384,7 @@
                 lgap: 10,
                 text: "无",
                 textAlign: "left",
-            }]
+            }];
         },
 
         render: function() {

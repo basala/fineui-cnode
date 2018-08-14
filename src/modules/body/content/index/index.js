@@ -47,23 +47,20 @@
                         width: 70,
                         el: {
                             type: "bi.vertical_adapt",
+                            height: 50,
                             items: [{
-                                type: "bi.vertical_adapt",
-                                height: 30,
-                                items: [{
-                                    type: "bi.label",
-                                    title: "回复数",
-                                    cls: "reply-num",
-                                    text: value.reply_count
-                                }, {
-                                    type: "bi.label",
-                                    text: "/"
-                                }, {
-                                    type: "bi.label",
-                                    title: "点击数",
-                                    cls: "click-num",
-                                    text: value.visit_count
-                                }]
+                                type: "bi.label",
+                                title: "回复数",
+                                cls: "reply-num",
+                                text: value.reply_count
+                            }, {
+                                type: "bi.label",
+                                text: "/"
+                            }, {
+                                type: "bi.label",
+                                title: "点击数",
+                                cls: "click-num",
+                                text: value.visit_count
                             }]
                         }
                     }, {

@@ -25,8 +25,6 @@
             var self = this;
             return {
                 type: "bi.vertical",
-                tgap: 10,
-                cls: "tab-container",
                 items: [{
                     type: "bi.button_group",
                     ref: function() {
@@ -38,7 +36,8 @@
                     scrollx: true,
                     cls: "tab-bar",
                     items: this._formatItems(this.model.allTabs)
-                }]
+                }],
+                tgap: 10
             };
         }
     });
