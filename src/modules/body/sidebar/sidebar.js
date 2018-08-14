@@ -358,9 +358,8 @@
 
         _formatOtherTopic: function(topics) {
             var self = this;
-            othertopics = topics.slice(1);
-            if (othertopics != 0) {
-                return BI.map(othertopics, function(index, topic) {
+            if (topics != 0) {
+                return BI.map(topics, function(index, topic) {
                     return {
                         type: "bi.text_button",
                         cls: "text-color",
@@ -371,7 +370,7 @@
                         textAlign: "left",
                         title: topic.title,
                         handler: function() {
-                            self.store.getPage(topic.id);
+                            self.store.getPage(topic);
                         }
                     };
                 });

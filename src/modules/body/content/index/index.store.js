@@ -32,6 +32,9 @@
                 $.ajax({
                     url: "https://cnodejs.org/api/v1/user/" + value.author.loginname,
                     success: function(res) {
+                        res.data.recent_topics = res.data.recent_topics.filter(function(v) {
+                            return v.id != value.id;
+                        });
                         self.platform.sidebarInfo = res.data;
                     }
                 });

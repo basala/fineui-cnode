@@ -19,7 +19,16 @@
                 var self = this;
                 self.platform.selectedHash = "getpage";
                 $.ajax({
-                    url: "https://cnodejs.org/api/v1/topic/" + value,
+                    url: "https://cnodejs.org/api/v1/user/" + value.author.loginname,
+                    success: function(res) {
+                        res.data.recent_topics = res.data.recent_topics.filter(function(v) {
+                            return v.id != value.id;
+                        });
+                        self.platform.sidebarInfo = res.data;
+                    }
+                });
+                $.ajax({
+                    url: "https://cnodejs.org/api/v1/topic/" + value.id,
                     success: function(res) {
                         self.platform.topicPage = res.data;
                     }

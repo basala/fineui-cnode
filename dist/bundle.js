@@ -1351,6 +1351,9 @@
                 $.ajax({
                     url: "https://cnodejs.org/api/v1/user/" + value.author.loginname,
                     success: function(res) {
+                        res.data.recent_topics = res.data.recent_topics.filter(function(v) {
+                            return v.id != value.id;
+                        });
                         self.platform.sidebarInfo = res.data;
                     }
                 });
@@ -2048,9 +2051,8 @@
 
         _formatOtherTopic: function(topics) {
             var self = this;
-            othertopics = topics.slice(1);
-            if (othertopics != 0) {
-                return BI.map(othertopics, function(index, topic) {
+            if (topics != 0) {
+                return BI.map(topics, function(index, topic) {
                     return {
                         type: "bi.text_button",
                         cls: "text-color",
@@ -2061,7 +2063,7 @@
                         textAlign: "left",
                         title: topic.title,
                         handler: function() {
-                            self.store.getPage(topic.id);
+                            self.store.getPage(topic);
                         }
                     };
                 });
@@ -2111,7 +2113,16 @@
                 var self = this;
                 self.platform.selectedHash = "getpage";
                 $.ajax({
-                    url: "https://cnodejs.org/api/v1/topic/" + value,
+                    url: "https://cnodejs.org/api/v1/user/" + value.author.loginname,
+                    success: function(res) {
+                        res.data.recent_topics = res.data.recent_topics.filter(function(v) {
+                            return v.id != value.id;
+                        });
+                        self.platform.sidebarInfo = res.data;
+                    }
+                });
+                $.ajax({
+                    url: "https://cnodejs.org/api/v1/topic/" + value.id,
                     success: function(res) {
                         self.platform.topicPage = res.data;
                     }
