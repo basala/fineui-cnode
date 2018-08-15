@@ -19,7 +19,6 @@
         },
 
         _formatContent: function(val) {
-            var title = val.title;
             var self = this;
             return [{
                 type: "bi.vertical",
